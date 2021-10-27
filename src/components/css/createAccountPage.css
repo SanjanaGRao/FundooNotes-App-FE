@@ -1,47 +1,173 @@
+@media only screen and (min-width: 800px) {
+  .imgBox{
+      height: auto;
+      min-height: 500px;
+      position: relative;
+      width: 800px;
+      right: 50%;
+      left: 50%;
+      margin-top: 4em; 
+      margin-left: -400px; 
+      margin-right: -400px;
+      margin-bottom: 5em;
+      border-radius: 8px;
+      border: 1px solid #dadce0;
+      transition: delay 0.5s;
+      transition: width 1s;
+  }
+  .img{
+      margin-left: 5%;
+      margin-right: 5%;
+  }
+  .innerImg{
+      display: inline-block;
+      display: flex;
+  }
+  }
+  
+  @media only screen and (max-width: 900px) {
+      .imgBox{
+          position: relative;
+          width: 498px;
+          height: auto;
+          min-height: 500px;
+          right: 50%;
+          left: 50%;    
+          margin-top: 4em; 
+          margin-left: -246px; 
+          margin-bottom: 5em;
+          border-radius: 8px;
+          border: 1px solid #dadce0;
+          transition: width 0.5s;
+      }
+      .img{
+          margin-left: 5%;
+          margin-right: 5%;
+          display: none;
+          transition: delay 2s;
+          transition: width 1s;
+      }
+      }
+  .outerBox {
+    box-flex: 1;
+    padding: 48px 40px 36px;
+  }
+  
+
+
 .rainbow {
-    font: bold italic 1.75em "Fira Sans", serif;
+  font-weight: bold;
+  font-size: 25px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande","Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  color: transparent;
   }
     
-  .rainbow span:nth-child(10n + 1) {
+  .rainbow span:nth-child(7n + 1) {
     color: #ab47bc;
   }
   
-  .rainbow span:nth-child(10n + 2){
+  .rainbow span:nth-child(7n + 2){
     color: #651fff;
   }
   
-  .rainbow span:nth-child(10n + 3){
+  .rainbow span:nth-child(7n + 3){
     color: #00bcd4;
   }
   
-  .rainbow span:nth-child(10n + 4){
+  .rainbow span:nth-child(7n + 4){
     color: #4caf50;
   }
   
-  .rainbow span:nth-child(10n + 5){
+  .rainbow span:nth-child(7n + 5){
     color: #ffda07;
   }
 
-  .rainbow span:nth-child(10n + 6){
+  .rainbow span:nth-child(7n + 6){
     color: #ff7707;
   }
 
-  .rainbow span:nth-child(10n + 7) {
+  .rainbow span:nth-child(7n + 7) {
     color: #fa0a06;
   }
 
-  .rainbow span:nth-child(10n + 8) {
-    color: #ab47bc;
-  }
-  
-  .rainbow span:nth-child(10n + 9){
-    color: #651fff;
-  }
-   
-  .rainbow span:nth-child(10n + 10){
-    color: #00bcd4;
-  }
-  
-  .rainbow span:nth-child(10n + 11){
-    color: #4caf50;
-  }
+.message {
+  color: rgba(20, 19, 19, 0.6);
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.66;
+  letter-spacing: 0.03333em;
+  text-align: left;
+  margin-top: 4px;
+  margin-right: 14px;
+  margin-bottom: 0;
+  margin-left: 14px;
+}
+
+.headingAndSubHeading {
+  margin-top: 4px;
+  margin-right: 14px;
+  margin-bottom: 0;
+  margin-left: 0px;
+}
+
+.showPassword{
+  margin-top: 4px;
+  margin-right: 14px;
+  margin-bottom: 0;
+  margin-left: 0px;
+}
+
+.signInSignUp {
+  display: inline-block;
+  display: flex;
+}
+
+.signIn {
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 14px;
+  color: #1a73e8;
+  margin-top: 48px;
+  margin-left: 20px;
+  margin-right: auto;
+  padding: 6px 0;
+}
+
+.create {
+  margin-top: 48px;
+  margin-left: auto;
+  margin-right: 12px;
+}
+
+.names {
+  display: inline-block;
+  display: flex;
+}
+
+.firstName {
+  width: 214.5px;
+  margin-right: 10px;
+}
+
+.lastName {
+  width: 214.5px;
+  margin-left: 10px;
+}
+
+.passwords {
+  display: inline-block;
+  display: flex;
+}
+
+.pass {
+  width: 214.5px;
+  margin-right: 10px;
+}
+
+.confirmPassword {
+  width: 214.5px;
+  margin-left: 10px;
+}
