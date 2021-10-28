@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/createAccountPage.css'
-import accounts from "../images/account.svg"
+import accounts from "../Assets/account.svg"
 import { Grid, Typography, TextField, Button } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
