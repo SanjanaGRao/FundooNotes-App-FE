@@ -6,7 +6,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
 export default function CreateAccount() {
-
     const [values, setValues] = React.useState({
         firstName: "",
         lastName: "",
@@ -15,22 +14,18 @@ export default function CreateAccount() {
         passwordConfirmation: "",
         showPassword: false,
     });
-
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
     };
-
     const handleClickShowPassword = () => {
         setValues({
             ...values,
             showPassword: !values.showPassword,
         });
     };
-
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-
     const headerStyle = { margin: 0 };
     return (
         <div className="imgBox" >
@@ -70,8 +65,6 @@ export default function CreateAccount() {
                                                 label='First Name'
                                                 placeholder="Enter your first name"
                                                 size="small"
-                                            // value={this.state.firstName}
-                                            // onChange={this.handleChange}
                                             />
                                         </div>
                                         <div className="lastName">
@@ -84,8 +77,6 @@ export default function CreateAccount() {
                                                 label='Last Name'
                                                 placeholder="Enter your last name"
                                                 size="small"
-                                            // value={this.state.lastName}
-                                            // onChange={this.handleChange}
                                             />
                                         </div>
                                     </div>
@@ -104,8 +95,6 @@ export default function CreateAccount() {
                                             autoComplete="email"
                                             size="small"
                                             helperText="Your mail can consist of letters, numbers and periods"
-                                        // value={this.state.email}
-                                        // onChange={this.handleChange}
                                         />
                                     </div>
                                     <br />
@@ -158,7 +147,6 @@ export default function CreateAccount() {
                                                 />
                                             }
                                             label={<span style={{ fontSize: '0.75rem' }}>Show Password</span>}
-                                        // onChange={this.handleChange}
                                         />
                                     </div>
                                     <div className="signInSignUp">
