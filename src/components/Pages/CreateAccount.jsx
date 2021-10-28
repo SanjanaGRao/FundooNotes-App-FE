@@ -4,6 +4,13 @@ import accounts from "../Assets/account.svg"
 import { Grid, Typography, TextField, Button } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 
 export default function CreateAccount() {
     const [values, setValues] = React.useState({
@@ -13,6 +20,7 @@ export default function CreateAccount() {
         password: "",
         passwordConfirmation: "",
         showPassword: false,
+        showPasswordConfirmation: false,
     });
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -21,6 +29,22 @@ export default function CreateAccount() {
         setValues({
             ...values,
             showPassword: !values.showPassword,
+
+        });
+    };
+    const handleClickShowPasswordConfirmation = () => {
+        setValues({
+            ...values,
+            showPasswordConfirmation: !values.showPasswordConfirmation
+
+        });
+    };
+    const handleClickShowPasswords = () => {
+        setValues({
+            ...values,
+            showPassword: !values.showPassword,
+            showPasswordConfirmation: !values.showPasswordConfirmation
+
         });
     };
     const handleMouseDownPassword = (event) => {
@@ -65,6 +89,8 @@ export default function CreateAccount() {
                                                 label='First Name'
                                                 placeholder="Enter your first name"
                                                 size="small"
+                                                value={values.firstName}
+                                                onChange={handleChange("firstName")}
                                             />
                                         </div>
                                         <div className="lastName">
@@ -77,6 +103,8 @@ export default function CreateAccount() {
                                                 label='Last Name'
                                                 placeholder="Enter your last name"
                                                 size="small"
+                                                value={values.lastName}
+                                                onChange={handleChange("lastName")}
                                             />
                                         </div>
                                     </div>
@@ -95,39 +123,73 @@ export default function CreateAccount() {
                                             autoComplete="email"
                                             size="small"
                                             helperText="Your mail can consist of letters, numbers and periods"
+                                            value={values.email}
+                                            onChange={handleChange("email")}
                                         />
                                     </div>
                                     <br />
                                     <div className="passwords" align="left">
                                         <div className="pass">
-                                            <TextField
-                                                required
-                                                className="firstPasswordBox"
-                                                label="Password"
-                                                variant="outlined"
-                                                size="small"
-                                                variant="outlined"
-                                                size="small"
-                                                type={values.showPassword ? "text" : "password"}
-                                                value={values.password}
-                                                onChange={handleChange("password")}
-                                                placeholder="Enter your password"
-                                            />
+                                            <FormControl sx={{ width: '25ch' }} variant="outlined">
+                                                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                                <OutlinedInput
+                                                    id="outlined-adornment-password"
+                                                    type={values.showPassword ? 'text' : 'password'}
+                                                    value={values.password}
+                                                    size="small"
+                                                    onChange={handleChange('password')}
+                                                    endAdornment={
+                                                        <InputAdornment position="start">
+                                                            <IconButton
+                                                                size="small"
+                                                                aria-label="toggle password visibility"
+                                                                onClick={handleClickShowPassword}
+                                                                onMouseDown={handleMouseDownPassword}
+                                                                edge="end"
+                                                            >
+                                                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    }
+                                                    label="Password"
+                                                    required
+                                                    fullwidth
+                                                    name="passwordConfirmation"
+                                                    color='primary'
+                                                    placeholder="Enter your password"
+                                                />
+                                            </FormControl>
                                         </div>
                                         <div className="confirmPassword">
-                                            <TextField
-                                                required
-                                                fullwidth
-                                                variant="outlined"
-                                                name="passwordConfirmation"
-                                                color='primary'
-                                                label='Confirm Password'
-                                                placeholder="Confirm your password"
-                                                size="small"
-                                                type={values.showPassword ? "text" : "password"}
-                                                value={values.passwordConfirmation}
-                                                onChange={handleChange("passwordConfirmation")}
-                                            />
+                                            <FormControl sx={{ width: '25ch' }} variant="outlined">
+                                                <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
+                                                <OutlinedInput
+                                                    id="outlined-adornment-password"
+                                                    type={values.showPasswordConfirmation ? 'text' : 'password'}
+                                                    value={values.passwordConfirmation}
+                                                    size="small"
+                                                    onChange={handleChange('passwordConfirmation')}
+                                                    endAdornment={
+                                                        <InputAdornment position="end">
+                                                            <IconButton
+                                                                size="small"
+                                                                aria-label="toggle password visibility"
+                                                                onClick={handleClickShowPasswordConfirmation}
+                                                                onMouseDown={handleMouseDownPassword}
+                                                                edge="end"
+                                                            >
+                                                                {values.showPasswordConfirmation ? <VisibilityOff /> : <Visibility />}
+                                                            </IconButton>
+                                                        </InputAdornment>
+                                                    }
+                                                    label="Confirm Password"
+                                                    required
+                                                    fullwidth
+                                                    name="passwordConfirmation"
+                                                    color='primary'
+                                                    placeholder="Confirm your password"
+                                                />
+                                            </FormControl>
                                         </div>
                                     </div>
                                     <div className="message">
@@ -142,11 +204,11 @@ export default function CreateAccount() {
                                                 <Checkbox
                                                     value="allowExtraEmails"
                                                     color="primary"
-                                                    onClick={handleClickShowPassword}
+                                                    onClick={handleClickShowPasswords}
                                                     onMouseDown={handleMouseDownPassword}
                                                 />
                                             }
-                                            label={<span style={{ fontSize: '0.75rem' }}>Show Password</span>}
+                                            label={<span style={{ fontSize: '0.75rem' }}>Show Passwords</span>}
                                         />
                                     </div>
                                     <div className="signInSignUp">
