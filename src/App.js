@@ -1,5 +1,5 @@
 import './App.css';
-import { CreateAccount } from './components/Pages/CreateAccount';
+import CreateAccount from './components/Pages/CreateAccount';
 
 
 function App() {
