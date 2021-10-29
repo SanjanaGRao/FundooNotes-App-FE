@@ -54,43 +54,13 @@
   font-size: 14px;
   color: #1a73e8;
   margin-top: 48px;
-  margin-left: 30px;
-  margin-right: auto;
+  margin-left: 50px;
+  margin-right: 50px;
   padding: 6px 0;
 }
 
-.submit {
+.login {
   margin-top: 48px;
-  margin-left: auto;
-  margin-right: 50px;
-}
-
-.form {
-    position:fixed;
-    top: 50%;
-    left: 50%;
-    width:30em;
-    height:18em;
-    margin-top: -9em; /*set to a negative number 1/2 of your height*/
-    margin-left: -15em; /*set to a negative number 1/2 of your width*/
-}
-
-.innerimg {
-    position:fixed;
-    top: 50%;
-    left: 50%;
-    width:30em;
-    height:18em;
-    margin-top: -9em; /*set to a negative number 1/2 of your height*/
-    margin-left: -15em; /*set to a negative number 1/2 of your width*/
-}
-
-.inputBox {
-    position:fixed;
-    top: 50%;
-    left: 50%;
-    width:30em;
-    height:18em;
-    margin-top: -9em; /*set to a negative number 1/2 of your height*/
-    margin-left: -15em; /*set to a negative number 1/2 of your width*/
+  margin-left: 10px !important;
+  margin-right: 10px !important ;
 }

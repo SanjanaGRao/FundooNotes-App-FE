@@ -1,6 +1,6 @@
 import './App.css';
-import CreateAccount from './components/Pages/CreateAccount';
-import Login from './components/Pages/Login';
+import CreateAccount from './components/CreateAccount';
+import Login from './components/Login';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 
