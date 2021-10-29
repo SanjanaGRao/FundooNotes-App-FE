@@ -1,97 +1,96 @@
 @media only screen and (min-width: 800px) {
-  .imgBox{
-      height: auto;
-      min-height: 500px;
-      position: relative;
-      width: 800px;
-      right: 50%;
-      left: 50%;
-      margin-top: 4em; 
-      margin-left: -400px; 
-      margin-right: -400px;
-      margin-bottom: 5em;
-      border-radius: 8px;
-      border: 1px solid #dadce0;
-      transition: delay 0.5s;
-      transition: width 1s;
+  .imgBox {
+    height: auto;
+    min-height: 500px;
+    position: relative;
+    width: 800px;
+    right: 50%;
+    left: 50%;
+    margin-top: 4em;
+    margin-left: -400px;
+    margin-right: -400px;
+    margin-bottom: 5em;
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    transition: delay 0.5s;
+    transition: width 1s;
   }
-  .img{
-      margin-left: 5%;
-      margin-right: 5%;
+  .img {
+    margin-left: 5%;
+    margin-right: 5%;
   }
-  .innerImg{
-      display: inline-block;
-      display: flex;
+  .innerImg {
+    display: inline-block;
+    display: flex;
   }
-  }
-  
-  @media only screen and (max-width: 900px) {
-      .imgBox{
-          position: relative;
-          width: 498px;
-          height: auto;
-          min-height: 500px;
-          right: 50%;
-          left: 50%;    
-          margin-top: 4em; 
-          margin-left: -246px; 
-          margin-bottom: 5em;
-          border-radius: 8px;
-          border: 1px solid #dadce0;
-          transition: width 0.5s;
-      }
-      .img{
-          margin-left: 5%;
-          margin-right: 5%;
-          display: none;
-          transition: delay 2s;
-          transition: width 1s;
-      }
-      }
-  .outerBox {
-    box-flex: 1;
-    padding: 48px 40px 36px;
-  }
-  
+}
 
+@media only screen and (max-width: 900px) {
+  .imgBox {
+    position: relative;
+    width: 498px;
+    height: auto;
+    min-height: 500px;
+    right: 50%;
+    left: 50%;
+    margin-top: 4em;
+    margin-left: -246px;
+    margin-bottom: 5em;
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    transition: width 0.5s;
+  }
+  .img {
+    margin-left: 5%;
+    margin-right: 5%;
+    display: none;
+    transition: delay 2s;
+    transition: width 1s;
+  }
+}
+.outerBox {
+  box-flex: 1;
+  padding: 48px 40px 36px;
+}
 
 .rainbow {
   font-weight: bold;
   font-size: 25px;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande","Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   -webkit-background-clip: text;
   -moz-background-clip: text;
   background-clip: text;
   color: transparent;
-  }
-    
-  .rainbow span:nth-child(7n + 1) {
-    color: #ab47bc;
-  }
-  
-  .rainbow span:nth-child(7n + 2){
-    color: #651fff;
-  }
-  
-  .rainbow span:nth-child(7n + 3){
-    color: #00bcd4;
-  }
-  
-  .rainbow span:nth-child(7n + 4){
-    color: #4caf50;
-  }
-  
-  .rainbow span:nth-child(7n + 5){
-    color: #ffda07;
-  }
+}
 
-  .rainbow span:nth-child(7n + 6){
-    color: #ff7707;
-  }
+.rainbow span:nth-child(7n + 1) {
+  color: #ab47bc;
+}
 
-  .rainbow span:nth-child(7n + 7) {
-    color: #fa0a06;
-  }
+.rainbow span:nth-child(7n + 2) {
+  color: #651fff;
+}
+
+.rainbow span:nth-child(7n + 3) {
+  color: #00bcd4;
+}
+
+.rainbow span:nth-child(7n + 4) {
+  color: #4caf50;
+}
+
+.rainbow span:nth-child(7n + 5) {
+  color: #ffda07;
+}
+
+.rainbow span:nth-child(7n + 6) {
+  color: #ff7707;
+}
+
+.rainbow span:nth-child(7n + 7) {
+  color: #fa0a06;
+}
 
 .message {
   color: rgba(20, 19, 19, 0.6);
@@ -114,7 +113,7 @@
   margin-left: 0px;
 }
 
-.showPassword{
+.showPassword {
   margin-top: 4px;
   margin-right: 14px;
   margin-bottom: 0;
