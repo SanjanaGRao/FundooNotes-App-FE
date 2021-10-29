@@ -1,6 +1,7 @@
 import React from 'react';
-import '../css/createAccountPage.css'
-import accounts from "../Assets/account.svg"
+import "/Users/sanjana.rao_ymediala/reactjs-fundooNotes/fundoonotes-app/src/css/createAccountPage.css";
+import accounts from "/Users/sanjana.rao_ymediala/reactjs-fundooNotes/fundoonotes-app/src/Assets/account.svg";
+import {nameValidation, emailValidation, passwordValidation} from "./Validation";
 import { Grid, Typography, TextField, Button } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -11,41 +12,47 @@ import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import { Link } from "react-router-dom";
 
-export default function CreateAccount() {
-    const [values, setValues] = React.useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        passwordConfirmation: "",
-        showPassword: false,
-        showPasswordConfirmation: false,
-    });
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
+export default function CreateAccount() {  
+
+    const [firstName, setFirstName] = React.useState("");
+    const [lastName, setLastName] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [passwordConfirmation, setPasswordConfirmation] = React.useState("");
+    const [firstNameNotValid, setFirstNameNotValid] = React.useState(false);
+    const [lastNameNotValid, setLastNameNotValid] = React.useState(false);
+    const [emailNotValid, setEmailNotValid] = React.useState(false);
+    const [passwordNotValid, setPasswordNotValid] = React.useState(false);
+    const [passwordConfirmationNotValid, setPasswordConfirmationNotValid] = React.useState(false);
+    const [showPassword, setShowPassword] = React.useState(false);
+    const [showPasswordConfirmation, setShowPasswordConfirmation] = React.useState(false);
+    
     const handleClickShowPassword = () => {
-        setValues({
-            ...values,
-            showPassword: !values.showPassword,
-
-        });
+        setShowPassword(!showPassword)
     };
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setFirstNameNotValid(false);
+        setLastNameNotValid(false);
+        setEmailNotValid(false);
+        setPasswordNotValid(false);
+        setPasswordConfirmationNotValid(false);
+        if (!nameValidation.test(firstName)) setFirstNameNotValid(true);
+        if (!nameValidation.test(lastName)) setLastNameNotValid(true);
+        if (!emailValidation.test(email)) setEmailNotValid(true);
+        if (!passwordValidation.test(password)) setPasswordNotValid(true);
+        if (password === passwordConfirmation) {
+            setPasswordConfirmationNotValid(true);
+        }
+      };
     const handleClickShowPasswordConfirmation = () => {
-        setValues({
-            ...values,
-            showPasswordConfirmation: !values.showPasswordConfirmation
-
-        });
+        setShowPasswordConfirmation(!showPasswordConfirmation)
     };
     const handleClickShowPasswords = () => {
-        setValues({
-            ...values,
-            showPassword: !values.showPassword,
-            showPasswordConfirmation: !values.showPasswordConfirmation
-
-        });
+            setShowPassword(!showPassword);
+            setShowPasswordConfirmation(!showPasswordConfirmation);
     };
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
@@ -89,8 +96,9 @@ export default function CreateAccount() {
                                                 label='First Name'
                                                 placeholder="Enter your first name"
                                                 size="small"
-                                                value={values.firstName}
-                                                onChange={handleChange("firstName")}
+                                                error={firstNameNotValid}
+                                                helperText={firstNameNotValid ? "Invalid First Name" : ""}
+                                                onChange={(event) => setFirstName(event.target.value)}
                                             />
                                         </div>
                                         <div className="lastName">
@@ -103,8 +111,9 @@ export default function CreateAccount() {
                                                 label='Last Name'
                                                 placeholder="Enter your last name"
                                                 size="small"
-                                                value={values.lastName}
-                                                onChange={handleChange("lastName")}
+                                                error={lastNameNotValid}
+                                                helperText={lastNameNotValid ? "Invalid Last Name" : ""}
+                                                onChange={(event) => setLastName(event.target.value)}
                                             />
                                         </div>
                                     </div>
@@ -122,9 +131,9 @@ export default function CreateAccount() {
                                             placeholder="xyz@example.com"
                                             autoComplete="email"
                                             size="small"
-                                            helperText="Your mail can consist of letters, numbers and periods"
-                                            value={values.email}
-                                            onChange={handleChange("email")}
+                                            error={emailNotValid}
+                                            helperText={emailNotValid ? "Invalid Email" : "Your mail can consist of letters, numbers and periods"}
+                                            onChange={(event) => setEmail(event.target.value)}
                                         />
                                     </div>
                                     <br />
@@ -134,10 +143,11 @@ export default function CreateAccount() {
                                                 <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                                                 <OutlinedInput
                                                     id="outlined-adornment-password"
-                                                    type={values.showPassword ? 'text' : 'password'}
-                                                    value={values.password}
+                                                    type={showPassword ? 'text' : 'password'}
                                                     size="small"
-                                                    onChange={handleChange('password')}
+                                                    error={passwordNotValid}
+                                                    helperText={ passwordNotValid ? "Invalid password" : "Use 8 or more characters with a mix of letters, numbers & symbols"}
+                                                    onChange={(event) => setPassword(event.target.value)}
                                                     endAdornment={
                                                         <InputAdornment position="start">
                                                             <IconButton
@@ -147,7 +157,7 @@ export default function CreateAccount() {
                                                                 onMouseDown={handleMouseDownPassword}
                                                                 edge="end"
                                                             >
-                                                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                                                {showPassword ? <VisibilityOff /> : <Visibility />}
                                                             </IconButton>
                                                         </InputAdornment>
                                                     }
@@ -165,10 +175,11 @@ export default function CreateAccount() {
                                                 <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
                                                 <OutlinedInput
                                                     id="outlined-adornment-password"
-                                                    type={values.showPasswordConfirmation ? 'text' : 'password'}
-                                                    value={values.passwordConfirmation}
+                                                    type={showPasswordConfirmation ? 'text' : 'password'}
                                                     size="small"
-                                                    onChange={handleChange('passwordConfirmation')}
+                                                    error={passwordConfirmationNotValid}
+                                                    helperText={passwordConfirmationNotValid ? "Password does not match" : ""}
+                                                    onChange={(event) => setPasswordConfirmation(event.target.value)}
                                                     endAdornment={
                                                         <InputAdornment position="end">
                                                             <IconButton
@@ -178,7 +189,7 @@ export default function CreateAccount() {
                                                                 onMouseDown={handleMouseDownPassword}
                                                                 edge="end"
                                                             >
-                                                                {values.showPasswordConfirmation ? <VisibilityOff /> : <Visibility />}
+                                                                {showPasswordConfirmation ? <VisibilityOff /> : <Visibility />}
                                                             </IconButton>
                                                         </InputAdornment>
                                                     }
@@ -213,10 +224,10 @@ export default function CreateAccount() {
                                     </div>
                                     <div className="signInSignUp">
                                         <div className="signIn">
-                                            <Button variant="text" style={{ textTransform: 'none' }} color='primary' ><b>Sign in instead</b></Button>
+                                            <Button variant="text" id="sign-in-button" component={Link} to="/login" style={{ textTransform: 'none' }} color='primary'><b>Sign in instead</b></Button>
                                         </div>
                                         <div className="create">
-                                            <Button type='submit' variant='contained' color='primary' ><b>Create</b></Button>
+                                            <Button type='submit' variant='contained' color='primary' onClick={handleSubmit} ><b>Create</b></Button>
                                         </div>
                                     </div>
                                 </div>
