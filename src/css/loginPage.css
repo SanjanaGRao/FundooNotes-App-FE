@@ -63,8 +63,8 @@
   font-family: "Google Sans", Roboto, Arial, sans-serif;
   font-size: 10px;
   color: #1a73e8;
-  /* margin-top: 10px; */
-  margin-left: 50px;
+  margin-top: 0px; 
+  margin-left: 0px;
   margin-right: 20px;
   padding: 6px 0;
 }
@@ -79,7 +79,7 @@
   font-size: 14px;
   color: #1a73e8;
   margin-top: 38px;
-  margin-left: 20px;
+  margin-left: 0px;
   margin-right: auto;
   padding: 6px 0;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import "/Users/sanjana.rao_ymediala/reactjs-fundooNotes/fundoonotes-app/src/css/loginPage.css";
+import "../css/loginPage.css";
 import {
   Grid,
   Typography,
@@ -16,6 +16,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import { Link } from "react-router-dom";
+import userPost from "../service/apiIntegration";
 
 export default function Login() {
   const [email, setEmail] = React.useState("");
@@ -33,6 +34,10 @@ export default function Login() {
     setPasswordNotValid(false);
     if (email === "") setEmailNotValid(true);
     if (password === "") setPasswordNotValid(true);
+    userPost("users/login", {
+      email: email,
+      password: password,
+    });
   };
   const handleClickShowPasswords = () => {
     setShowPassword(!showPassword);
@@ -149,9 +154,8 @@ export default function Login() {
                         & symbols
                       </span>
                     </div>
-                    <br />
                     <div>
-                      <div className="showPasswordLogin">
+                      <div className="showPasswordLogin" align = "left">
                         <FormControlLabel
                           control={
                             <Checkbox
@@ -168,7 +172,8 @@ export default function Login() {
                           }
                         />
                       </div>
-                      <div className="forgotPassword" align="right">
+                      <br />
+                      <div className="forgotPassword" align="left">
                         <Button
                           variant="text"
                           style={{ textTransform: "none" }}

@@ -1,6 +1,6 @@
 import React from "react";
-import "/Users/sanjana.rao_ymediala/reactjs-fundooNotes/fundoonotes-app/src/css/createAccountPage.css";
-import accounts from "/Users/sanjana.rao_ymediala/reactjs-fundooNotes/fundoonotes-app/src/Assets/account.svg";
+import "../css/createAccountPage.css";
+import accounts from "../assets/account.svg";
 import {
   nameValidation,
   emailValidation,
@@ -22,7 +22,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import { Link } from "react-router-dom";
-import userConnect from "../service/CreateAccountAPI";
+import userPost from "../service/apiIntegration";
 
 export default function CreateAccount() {
   const [firstName, setFirstName] = React.useState("");
@@ -57,7 +57,7 @@ export default function CreateAccount() {
     if (password === passwordConfirmation) {
       setPasswordConfirmationNotValid(true);
     }
-    userConnect({
+    userPost("users", {
       firstName: firstName,
       lastName: lastName,
       email: email,
@@ -265,7 +265,7 @@ export default function CreateAccount() {
                     </span>
                   </div>
                   <br />
-                  <div className="showPassword">
+                  <div className="showPassword" align="left">
                     <FormControlLabel
                       control={
                         <Checkbox
