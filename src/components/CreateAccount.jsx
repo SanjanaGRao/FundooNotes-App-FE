@@ -5,7 +5,7 @@ import {
   nameValidation,
   emailValidation,
   passwordValidation,
-} from "./Validation";
+} from "../config/Validation";
 import {
   Grid,
   Typography,

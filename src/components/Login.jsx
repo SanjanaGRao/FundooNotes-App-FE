@@ -36,7 +36,7 @@ export default function Login() {
     if (password === "") setPasswordNotValid(true);
     userPost("users/login", {
       email: email,
-      password: password,
+      password: password,  
     });
   };
   const handleClickShowPasswords = () => {
