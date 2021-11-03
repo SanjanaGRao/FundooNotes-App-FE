@@ -1,5 +1,14 @@
 .mainLogoLogin {
-  background: linear-gradient(to left, red, orange , yellow, green, cyan, indigo, violet);
+  background: linear-gradient(
+    to left,
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    indigo,
+    violet
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
@@ -30,7 +39,7 @@
   border: 1px solid #b2b2b4;
   transition: width 0.5s;
 }
-.passwordAndForgotPassword{
+.passwordAndForgotPassword {
   display: inline-block;
   display: flex;
 }
@@ -39,7 +48,7 @@
   font-family: "Google Sans", Roboto, Arial, sans-serif;
   font-size: 7px;
   color: #1a73e8;
-  margin-top: 0px; 
+  margin-top: 0px;
   margin-left: 105px;
   margin-right: 0px;
   padding: 6px 0;

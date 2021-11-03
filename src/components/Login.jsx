@@ -34,7 +34,7 @@ export default function Login() {
     if (password === "") setPasswordNotValid(true);
     userPost("users/login", {
       email: email,
-      password: password,  
+      password: password,
     });
   };
   const handleClickShowPasswords = () => {
@@ -86,12 +86,10 @@ export default function Login() {
                         }
                         onChange={(event) => {
                           setEmail(event.target.value);
-                          if(emailNotValid)
-                          {
+                          if (emailNotValid) {
                             setEmailNotValid(false);
                           }
-                        }
-                        }
+                        }}
                       />
                     </div>
                     <br />
@@ -114,12 +112,10 @@ export default function Login() {
                             }
                             onChange={(event) => {
                               setPassword(event.target.value);
-                              if(passwordNotValid)
-                              {
+                              if (passwordNotValid) {
                                 setPasswordNotValid(false);
                               }
-                            }
-                            }
+                            }}
                             endAdornment={
                               <InputAdornment position="start">
                                 <IconButton
@@ -153,7 +149,7 @@ export default function Login() {
                     </div>
                     <br />
                     <div className="passwordAndForgotPassword">
-                      <div className="showPasswordLogin" align = "left">
+                      <div className="showPasswordLogin" align="left">
                         <FormControlLabel
                           control={
                             <Checkbox

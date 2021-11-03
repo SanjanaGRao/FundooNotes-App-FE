@@ -76,7 +76,7 @@ export default function CreateAccount() {
         <div>
           <div>
             <Grid align="left" className="headingAndSubHeading">
-            <span className="mainLogo">FundooNotes</span>
+              <span className="mainLogo">FundooNotes</span>
               <br />
               <Typography variant="h6" gutterBottom>
                 <b>Create your FundooNotes Account</b>
@@ -103,12 +103,10 @@ export default function CreateAccount() {
                         }
                         onChange={(event) => {
                           setFirstName(event.target.value);
-                          if(firstNameNotValid)
-                          {
+                          if (firstNameNotValid) {
                             setFirstNameNotValid(false);
                           }
-                        }
-                        }
+                        }}
                       />
                     </div>
                     <div className="lastName">
@@ -125,12 +123,10 @@ export default function CreateAccount() {
                         helperText={lastNameNotValid ? "Invalid Last Name" : ""}
                         onChange={(event) => {
                           setLastName(event.target.value);
-                          if(lastNameNotValid)
-                          {
+                          if (lastNameNotValid) {
                             setLastNameNotValid(false);
                           }
-                        }
-                        }
+                        }}
                       />
                     </div>
                   </div>
@@ -156,12 +152,10 @@ export default function CreateAccount() {
                       }
                       onChange={(event) => {
                         setEmail(event.target.value);
-                        if(emailNotValid)
-                        {
+                        if (emailNotValid) {
                           setEmailNotValid(false);
                         }
-                      }
-                      }
+                      }}
                     />
                   </div>
                   <br />
@@ -187,12 +181,10 @@ export default function CreateAccount() {
                           }
                           onChange={(event) => {
                             setPassword(event.target.value);
-                            if(passwordNotValid)
-                            {
+                            if (passwordNotValid) {
                               setPasswordNotValid(false);
                             }
-                          }
-                          }
+                          }}
                           endAdornment={
                             <InputAdornment position="start">
                               <IconButton
@@ -240,12 +232,10 @@ export default function CreateAccount() {
                           }
                           onChange={(event) => {
                             setPasswordConfirmation(event.target.value);
-                            if(passwordConfirmationNotValid)
-                            {
+                            if (passwordConfirmationNotValid) {
                               setPasswordConfirmationNotValid(false);
                             }
-                          }
-                          }
+                          }}
                           endAdornment={
                             <InputAdornment position="end">
                               <IconButton
@@ -328,7 +318,7 @@ export default function CreateAccount() {
                     width={260}
                     height={244}
                     style={{ verticalAlign: "middle" }}
-                    alt= ""
+                    alt=""
                   />
                 </div>
               </div>

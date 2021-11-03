@@ -54,7 +54,16 @@
 }
 
 .mainLogo {
-  background: linear-gradient(to left, red, orange , yellow, green, cyan, indigo, violet);
+  background: linear-gradient(
+    to left,
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    indigo,
+    violet
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
