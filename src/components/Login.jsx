@@ -30,8 +30,6 @@ export default function Login() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    setEmailNotValid(false);
-    setPasswordNotValid(false);
     if (email === "") setEmailNotValid(true);
     if (password === "") setPasswordNotValid(true);
     userPost("users/login", {
@@ -86,7 +84,14 @@ export default function Login() {
                             ? "This field cannot be empty"
                             : "You can use letters, numbers and periods"
                         }
-                        onChange={(event) => setEmail(event.target.value)}
+                        onChange={(event) => {
+                          setEmail(event.target.value);
+                          if(emailNotValid)
+                          {
+                            setEmailNotValid(false);
+                          }
+                        }
+                        }
                       />
                     </div>
                     <br />
@@ -107,8 +112,13 @@ export default function Login() {
                                 ? "This field cannot be empty"
                                 : ""
                             }
-                            onChange={(event) =>
-                              setPassword(event.target.value)
+                            onChange={(event) => {
+                              setPassword(event.target.value);
+                              if(passwordNotValid)
+                              {
+                                setPasswordNotValid(false);
+                              }
+                            }
                             }
                             endAdornment={
                               <InputAdornment position="start">
