@@ -1,40 +1,11 @@
-.rainbow {
+.mainLogoLogin {
+  background: linear-gradient(to left, red, orange , yellow, green, cyan, indigo, violet);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: bold;
   font-size: 25px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.rainbow span:nth-child(7n + 1) {
-  color: #ab47bc;
-}
-
-.rainbow span:nth-child(7n + 2) {
-  color: #651fff;
-}
-
-.rainbow span:nth-child(7n + 3) {
-  color: #00bcd4;
-}
-
-.rainbow span:nth-child(7n + 4) {
-  color: #4caf50;
-}
-
-.rainbow span:nth-child(7n + 5) {
-  color: #ffda07;
-}
-
-.rainbow span:nth-child(7n + 6) {
-  color: #ff7707;
-}
-
-.rainbow span:nth-child(7n + 7) {
-  color: #fa0a06;
 }
 
 .headingAndSubHeading {
@@ -58,14 +29,18 @@
   border: 1px solid #b2b2b4;
   transition: width 0.5s;
 }
+.passwordAndForgotPassword{
+  display: inline-block;
+  display: flex;
+}
 
 .forgotPassword {
   font-family: "Google Sans", Roboto, Arial, sans-serif;
-  font-size: 10px;
+  font-size: 7px;
   color: #1a73e8;
   margin-top: 0px; 
-  margin-left: 0px;
-  margin-right: 20px;
+  margin-left: 105px;
+  margin-right: 0px;
   padding: 6px 0;
 }
 

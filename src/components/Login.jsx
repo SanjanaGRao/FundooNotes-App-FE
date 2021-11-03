@@ -45,7 +45,6 @@ export default function Login() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const headerStyle = { margin: 0 };
   return (
     <div className="imgBoxForLogin">
       <div className="outerBox">
@@ -53,19 +52,7 @@ export default function Login() {
         <div>
           <div className="main" align="center">
             <Grid align="center" className="headingAndSubHeading">
-              <h1 class="rainbow" style={headerStyle}>
-                <span>F</span>
-                <span>u</span>
-                <span>n</span>
-                <span>d</span>
-                <span>o</span>
-                <span>o</span>
-                <span>N</span>
-                <span>o</span>
-                <span>t</span>
-                <span>e</span>
-                <span>s</span>
-              </h1>
+              <span className="mainLogoLogin">FundooNotes</span>
               <br />
               <Typography variant="h6" gutterBottom>
                 <b> Sign In</b>
@@ -154,7 +141,8 @@ export default function Login() {
                         & symbols
                       </span>
                     </div>
-                    <div>
+                    <br />
+                    <div className="passwordAndForgotPassword">
                       <div className="showPasswordLogin" align = "left">
                         <FormControlLabel
                           control={
@@ -172,12 +160,12 @@ export default function Login() {
                           }
                         />
                       </div>
-                      <br />
-                      <div className="forgotPassword" align="left">
+                      <div className="forgotPassword" align="right">
                         <Button
                           variant="text"
                           style={{ textTransform: "none" }}
                           color="primary"
+                          size="small"
                         >
                           Forgot Password?
                         </Button>

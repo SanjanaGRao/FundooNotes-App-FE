@@ -45,11 +45,6 @@ export default function CreateAccount() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    setFirstNameNotValid(false);
-    setLastNameNotValid(false);
-    setEmailNotValid(false);
-    setPasswordNotValid(false);
-    setPasswordConfirmationNotValid(false);
     if (!nameValidation.test(firstName)) setFirstNameNotValid(true);
     if (!nameValidation.test(lastName)) setLastNameNotValid(true);
     if (!emailValidation.test(email)) setEmailNotValid(true);
@@ -74,7 +69,6 @@ export default function CreateAccount() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const headerStyle = { margin: 0 };
   return (
     <div className="imgBox">
       <div className="outerBox">
@@ -82,19 +76,7 @@ export default function CreateAccount() {
         <div>
           <div>
             <Grid align="left" className="headingAndSubHeading">
-              <h1 class="rainbow" style={headerStyle}>
-                <span>F</span>
-                <span>u</span>
-                <span>n</span>
-                <span>d</span>
-                <span>o</span>
-                <span>o</span>
-                <span>N</span>
-                <span>o</span>
-                <span>t</span>
-                <span>e</span>
-                <span>s</span>
-              </h1>
+            <span className="mainLogo">FundooNotes</span>
               <br />
               <Typography variant="h6" gutterBottom>
                 <b>Create your FundooNotes Account</b>
@@ -119,7 +101,14 @@ export default function CreateAccount() {
                         helperText={
                           firstNameNotValid ? "Invalid First Name" : ""
                         }
-                        onChange={(event) => setFirstName(event.target.value)}
+                        onChange={(event) => {
+                          setFirstName(event.target.value);
+                          if(firstNameNotValid)
+                          {
+                            setFirstNameNotValid(false);
+                          }
+                        }
+                        }
                       />
                     </div>
                     <div className="lastName">
@@ -134,7 +123,14 @@ export default function CreateAccount() {
                         size="small"
                         error={lastNameNotValid}
                         helperText={lastNameNotValid ? "Invalid Last Name" : ""}
-                        onChange={(event) => setLastName(event.target.value)}
+                        onChange={(event) => {
+                          setLastName(event.target.value);
+                          if(lastNameNotValid)
+                          {
+                            setLastNameNotValid(false);
+                          }
+                        }
+                        }
                       />
                     </div>
                   </div>
@@ -158,7 +154,14 @@ export default function CreateAccount() {
                           ? "Invalid Email"
                           : "Your mail can consist of letters, numbers and periods"
                       }
-                      onChange={(event) => setEmail(event.target.value)}
+                      onChange={(event) => {
+                        setEmail(event.target.value);
+                        if(emailNotValid)
+                        {
+                          setEmailNotValid(false);
+                        }
+                      }
+                      }
                     />
                   </div>
                   <br />
@@ -182,7 +185,14 @@ export default function CreateAccount() {
                               ? "Invalid password"
                               : "Use 8 or more characters with a mix of letters, numbers & symbols"
                           }
-                          onChange={(event) => setPassword(event.target.value)}
+                          onChange={(event) => {
+                            setPassword(event.target.value);
+                            if(passwordNotValid)
+                            {
+                              setPasswordNotValid(false);
+                            }
+                          }
+                          }
                           endAdornment={
                             <InputAdornment position="start">
                               <IconButton
@@ -228,8 +238,13 @@ export default function CreateAccount() {
                               ? "Password does not match"
                               : ""
                           }
-                          onChange={(event) =>
-                            setPasswordConfirmation(event.target.value)
+                          onChange={(event) => {
+                            setPasswordConfirmation(event.target.value);
+                            if(passwordConfirmationNotValid)
+                            {
+                              setPasswordConfirmationNotValid(false);
+                            }
+                          }
                           }
                           endAdornment={
                             <InputAdornment position="end">
@@ -313,6 +328,7 @@ export default function CreateAccount() {
                     width={260}
                     height={244}
                     style={{ verticalAlign: "middle" }}
+                    alt= ""
                   />
                 </div>
               </div>
