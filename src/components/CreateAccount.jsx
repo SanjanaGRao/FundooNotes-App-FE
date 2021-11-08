@@ -5,7 +5,7 @@ import {
   nameValidation,
   emailValidation,
   passwordValidation,
-} from "../config/Validation";
+} from "../config/validation";
 import {
   Grid,
   Typography,
@@ -43,6 +43,7 @@ export default function CreateAccount() {
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!nameValidation.test(firstName)) setFirstNameNotValid(true);
@@ -59,16 +60,20 @@ export default function CreateAccount() {
       password: password,
     });
   };
+
   const handleClickShowPasswordConfirmation = () => {
     setShowPasswordConfirmation(!showPasswordConfirmation);
   };
+
   const handleClickShowPasswords = () => {
     setShowPassword(!showPassword);
     setShowPasswordConfirmation(!showPasswordConfirmation);
   };
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  
   return (
     <div className="imgBox">
       <div className="outerBox">

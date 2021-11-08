@@ -1,7 +1,8 @@
+import { baseUrl } from "../config/baseUrl";
 import userConnect from "../helper/axiosUrl";
 
 const userPost = (url, data) => {
-  userConnect("post",`http://localhost:4000/${url}`,data );
+  userConnect("post",`${baseUrl}/${url}`,data );
 }
 export default userPost;
 

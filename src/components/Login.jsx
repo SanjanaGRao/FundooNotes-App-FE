@@ -172,6 +172,8 @@ export default function Login() {
                           style={{ textTransform: "none" }}
                           color="primary"
                           size="small"
+                          component={Link}
+                          to="/forgot"
                         >
                           Forgot Password?
                         </Button>

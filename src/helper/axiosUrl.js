@@ -5,6 +5,7 @@ const userConnect = (method, url, infos) => {
     method: method,
     url: url,
     data: infos,
+    headers: { "Content-type":"application/json" },
   })
     .then(function (response) {
       console.log(response.data);
