@@ -3,6 +3,7 @@ import userPost from "../service/apiIntegration";
 import { Link } from "react-router-dom";
 import { Grid, TextField, Typography, Button } from "@mui/material";
 import "../css/forgetPasswordPage.css";
+import { emailValidation } from "../config/validation";
 
 export default function ForgetPassword() {
   const [email, setEmail] = useState("");
@@ -10,12 +11,15 @@ export default function ForgetPassword() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (email === "") {
+    if (email === "" || !emailValidation.test(email)) {
       setEmailNotValid(true);
+      alert("An error occured.");
+    } else {
+      userPost("users/forgot", {
+        email: email,
+      });
+      alert("Email Successfully Sent.");
     }
-    userPost("users/forgot", {
-      email: email,
-    });
   };
   return (
     <div
@@ -53,13 +57,13 @@ export default function ForgetPassword() {
                   type="email"
                   placeholder="xyz@example.com"
                   error={emailNotValid}
-                  helperText={emailNotValid ? "This field cannot be empty" : ""}
+                  helperText={emailNotValid ? "Please enter a valid email" : ""}
                   fullWidth
                   onChange={(event) => {
                     setEmail(event.target.value);
                     if (emailNotValid) {
                       setEmailNotValid(false);
-                    }  
+                    }
                   }}
                 />
               </Grid>
@@ -75,7 +79,7 @@ export default function ForgetPassword() {
                   style={{ textTransform: "none" }}
                   color="primary"
                 >
-                 <b> Back </b>
+                  <b> Back </b>
                 </Button>
               </div>
               <div className="create">
@@ -85,7 +89,7 @@ export default function ForgetPassword() {
                   color="primary"
                   onClick={handleSubmit}
                 >
-                  <b>Submit</b>
+                  <b>Next</b>
                 </Button>
               </div>
             </div>

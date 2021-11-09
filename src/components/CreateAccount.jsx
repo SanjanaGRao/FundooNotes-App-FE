@@ -50,15 +50,18 @@ export default function CreateAccount() {
     if (!nameValidation.test(lastName)) setLastNameNotValid(true);
     if (!emailValidation.test(email)) setEmailNotValid(true);
     if (!passwordValidation.test(password)) setPasswordNotValid(true);
-    if (password === passwordConfirmation) {
+    if (password !== passwordConfirmation) {
       setPasswordConfirmationNotValid(true);
+    } else {
+      userPost("users", {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      });
+      alert("Sucessfully Created your Account.");
+      window.location = "/login";
     }
-    userPost("users", {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-    });
   };
 
   const handleClickShowPasswordConfirmation = () => {
@@ -73,7 +76,7 @@ export default function CreateAccount() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  
+
   return (
     <div className="imgBox">
       <div className="outerBox">

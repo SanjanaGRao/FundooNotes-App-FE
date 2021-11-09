@@ -32,10 +32,13 @@ export default function Login() {
     event.preventDefault();
     if (email === "") setEmailNotValid(true);
     if (password === "") setPasswordNotValid(true);
-    userPost("users/login", {
-      email: email,
-      password: password,
-    });
+    else {
+      userPost("users/login", {
+        email: email,
+        password: password,
+      });
+      alert("Successfully Logged In");
+    }
   };
   const handleClickShowPasswords = () => {
     setShowPassword(!showPassword);
