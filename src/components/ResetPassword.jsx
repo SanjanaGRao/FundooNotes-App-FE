@@ -38,7 +38,7 @@ export default function ResetPassword() {
         password: password,
         token: token,
       });
-      alert("Reset Password Successful.");
+      alert("Password Reset Successful.");
       window.location = "/login";
     }
   };
@@ -51,7 +51,7 @@ export default function ResetPassword() {
       <div className="outerBox">
         <div className="outerPadding"></div>
         <form id="resetPassword" autoComplete="off" onSubmit={handleSubmit}>
-          <div>
+          <>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography variant="h5">
@@ -157,7 +157,7 @@ export default function ResetPassword() {
                 </Button>
               </div>
             </div>
-          </div>
+          </>
         </form>
       </div>
     </div>

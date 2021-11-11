@@ -38,6 +38,7 @@ export default function Login() {
         password: password,
       });
       alert("Successfully Logged In");
+      window.location = "/dashboard";
     }
   };
   const handleClickShowPasswords = () => {
