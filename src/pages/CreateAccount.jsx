@@ -22,7 +22,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import { Link } from "react-router-dom";
-import userPost from "../service/apiIntegration";
+import userPost from "../service/usersApiIntegration";
 
 export default function CreateAccount() {
   const [firstName, setFirstName] = React.useState("");

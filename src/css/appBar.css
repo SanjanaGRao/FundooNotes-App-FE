@@ -1,20 +1,12 @@
 .mainLogoAppBar {
-    background: linear-gradient(
-        to left,
-        red,
-        orange,
-        yellow,
-        green,
-        cyan,
-        indigo,
-        violet
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: bold;
-      font-size: 25px;
-      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-      background-clip: text;
+  display: inline-block;
+  color: #5f6368;
+  font-family: 'Product Sans',Arial,sans-serif;
+  font-size: 22px;
+  position: relative;
+  vertical-align: middle;
 }
-
+.searchBar {
+  background-color: #f1f3f4;
+  border-color: #f1f3f4 ;
+}

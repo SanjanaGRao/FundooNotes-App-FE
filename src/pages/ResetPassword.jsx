@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import userPost from "../service/apiIntegration";
+import userPost from "../service/usersApiIntegration";
 import {
   Grid,
   TextField,
