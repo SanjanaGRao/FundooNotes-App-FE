@@ -15,4 +15,12 @@ const notes = () => {
     });
 }
 
-export default notes;
+const createNotes = (data) => {
+    return createNotes(url,data,`bearer ${token}`).then((response)=>{
+        console.log(response)
+    }).catch((err)=>{
+        console.log(err)
+    }); 
+}
+
+export {notes, createNotes};

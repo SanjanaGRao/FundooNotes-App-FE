@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/loginPage.css";
+import "../css/login/loginPage.css";
 import {
   Grid,
   Typography,

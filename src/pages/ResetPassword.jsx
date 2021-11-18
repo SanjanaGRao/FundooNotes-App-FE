@@ -9,7 +9,7 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
-import "../css/resetPasswordPage.css";
+import "../css/resetPassword/resetPasswordPage.css";
 import { passwordValidation } from "../config/validation";
 
 export default function ResetPassword() {

@@ -11,6 +11,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 
+
 const drawerWidth = 200;
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -50,7 +51,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MiniDrawer()  {
+export default function MiniDrawer( {handleTitle} )  {
     const [open, setOpen] = useState(false);
     const handleDrawerOpen = () =>  {
       setOpen(true);
@@ -60,6 +61,18 @@ export default function MiniDrawer()  {
       setOpen(false);
     };
 
+    const ListItemsColour = styled(ListItem)`
+    &:hover {
+      background-color: #e6e8e6;
+    }
+    &:click {
+      background-color: #e6e8e6;
+    }
+    &:focus {
+      background-color: #f5cb90;
+    }
+    `;
+
   return (
     <Drawer
       variant="permanent"
@@ -68,26 +81,36 @@ export default function MiniDrawer()  {
       onMouseLeave={handleDrawerClose}
     >
       <List style={{ marginTop: "65px", color: "#202124" }}>
-        {["Notes", "Reminders", "Edit Labels", "Archive", "Bin"].map(
-          (text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon sx={{ color: "#5f6368" }}>
-                {index === 0 ? (
-                  <LightbulbOutlinedIcon />
-                ) : index === 1 ? (
-                  <NotificationsNoneOutlinedIcon />
-                ) : index === 2 ? (
-                  <EditOutlinedIcon />
-                ) : index === 3 ? (
-                  <ArchiveOutlinedIcon />
-                ) : (
-                  <DeleteOutlinedIcon />
-                )}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          )
-        )}
+      <ListItemsColour button onClick={() => handleTitle("FundooNotes")}>
+          <ListItemIcon>
+            <LightbulbOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Notes"/>
+        </ListItemsColour>
+        <ListItemsColour button onClick={() => handleTitle("Reminders")}>
+          <ListItemIcon>
+            <NotificationsNoneOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Reminders" />
+        </ListItemsColour>
+        <ListItemsColour button onClick={() => handleTitle("Edit labels")}>
+          <ListItemIcon>
+            <EditOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Edit labels" />
+        </ListItemsColour>
+        <ListItemsColour button onClick={() => handleTitle("Archive")}>
+          <ListItemIcon>
+            <ArchiveOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Archive" />
+        </ListItemsColour>
+        <ListItemsColour button onClick={() => handleTitle("Bin")}>
+          <ListItemIcon>
+            <DeleteOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Bin" />
+        </ListItemsColour>
       </List>
     </Drawer>
   );

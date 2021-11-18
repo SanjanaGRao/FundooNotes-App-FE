@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/createAccountPage.css";
+import "../css/createAccount/createAccountPage.css";
 import accounts from "../assets/account.svg";
 import {
   nameValidation,

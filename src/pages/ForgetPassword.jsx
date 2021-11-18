@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import userPost from "../service/usersApiIntegration";
 import { Link } from "react-router-dom";
 import { Grid, TextField, Typography, Button } from "@mui/material";
-import "../css/forgetPasswordPage.css";
+import "../css/forgetPassword/forgetPasswordPage.css";
 import { emailValidation } from "../config/validation";
 
 export default function ForgetPassword() {

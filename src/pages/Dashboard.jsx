@@ -1,23 +1,34 @@
 import React from 'react';
 import { useState, useEffect } from "react";
-import { Box, CssBaseline } from "@mui/material";
+import { Box } from "@mui/material";
 import Appbar from "../components/Appbar";
 import MiniDrawer from "../components/MiniDrawer";
 import Notes from "../components/Notes";
-import notes from "../service/notesIntegration"
+import { notes } from "../service/notesIntegration";
+import { useDispatch } from "react-redux";
+import { setNotes } from "../reduxActions/actionsOnNotes";
+import AddNotes from '../components/AddNotes';
 
 export default function Dashboard() {
     const [open, setOpen] = useState(false);
-    const [note, setNote] = useState([]);
+    const [title,setTitle] = useState('FundooNotes')
+
+    const dispatch = useDispatch();
+
+    const handleTitle = (title) => {
+      setTitle(title);
+    }
 
     useEffect(() => {
       fetchitem();
     }, []);
 
     const fetchitem = () => {
+      
       notes()
         .then((res) => {
-          setNote(res.data);
+          dispatch(setNotes(res.data));
+          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -25,21 +36,21 @@ export default function Dashboard() {
     };
 
     const handleDrawer = () => {
-      setOpen(!open);
-    };
- 
-    const handleDrawerOpen = () =>  {
-      setOpen(true);
+        setOpen((previousState) => {
+          return !previousState;
+        });
     };
 
+
+
     return (
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        <Appbar handleDrawer={handleDrawer} />
-        <MiniDrawer open={open}  />
-        <Box sx={{ flexGrow: 1, p: 3}}>
-          <Notes notes={note} />
+      <div>
+        <Appbar handleDrawer={handleDrawer} title={title}/>
+        <MiniDrawer open={open}  handleTitle={handleTitle} />
+        <AddNotes />
+        <Box sx={{ flexGrow: 1, p: 10}}>
+          <Notes />
         </Box>
-      </Box>
+      </div>
     );
 }
