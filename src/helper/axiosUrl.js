@@ -31,4 +31,15 @@ const getNote = (url, token) => {
 }))  
 };
 
-export {userConnect, getNote} ;
+const createNotes=(url,data,token)=>{
+  return(axios({
+      method: "post",
+      url: url,
+      data:data,
+      headers: {
+          Authorization: token
+      }
+  }))
+}
+
+export {userConnect, getNote, createNotes} ;

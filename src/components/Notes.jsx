@@ -12,10 +12,10 @@ const Notes = () => {
   return (
     <Box sx={{ mx: '2px', transform: 'scale(0.8)' }}>
       <Grid container spacing={4}>
-        {myNotes.map((item) => {
+        {myNotes.map((item, singleNote) => {
           return (
             <Grid item xs={12} sm={6} md={3} key={item._id}>
-              <Card variant="outlined" sx={{ width: 250, height: 170 }} onMouseOver={() => {setMouseHover(true);}} onMouseLeave={() => {setMouseHover(false); }}>
+              <Card variant="outlined" sx={{ width: 250, height: 170 }} key= {singleNote} onMouseOver={() => {setMouseHover({[singleNote]:true});}} onMouseLeave={() => {setMouseHover({[singleNote]:false}); }}>
                 <CardContent>
                   <Typography variant="h5">{item.title}</Typography>
                   <br />
@@ -23,7 +23,7 @@ const Notes = () => {
                     {item.content}
                   </Typography>
                 </CardContent>
-                {mouseHover ? <NotesFunctionIcons /> : null}
+                {mouseHover[singleNote] ? <NotesFunctionIcons /> : null}
               </Card>
             </Grid>
           );

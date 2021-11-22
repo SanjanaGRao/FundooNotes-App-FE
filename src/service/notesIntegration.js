@@ -1,4 +1,4 @@
-import { getNote } from "../helper/axiosUrl";
+import { getNote, createNotes } from "../helper/axiosUrl";
 import { getToken } from "../utils/userTokens"
 
 const token = getToken("token");
@@ -15,7 +15,7 @@ const notes = () => {
     });
 }
 
-const createNotes = (data) => {
+const createNewNotes = (data) => {
     return createNotes(url,data,`bearer ${token}`).then((response)=>{
         console.log(response)
     }).catch((err)=>{
@@ -23,4 +23,4 @@ const createNotes = (data) => {
     }); 
 }
 
-export {notes, createNotes};
+export {notes, createNewNotes};

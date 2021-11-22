@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { createNotes } from "../service/notesIntegration";
+import { createNewNotes } from "../service/notesIntegration";
 import { useHistory } from "react-router-dom";
 import { Button } from "@mui/material";
 import "../css/dashboard/addNotes.css";
+import { useDispatch } from "react-redux";
 import NotesFunctionIcons from "../components/NotesFunctionIcons";
 
 export default function AddNotes() {
@@ -10,6 +11,25 @@ export default function AddNotes() {
   const [titleFieldVisible, setTitleFieldVisible] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const dispatch = useDispatch();
+
+  // const handleAddNotes = () => {
+  //   let data = {
+  //     title: title,
+  //     content: content,
+  //   };
+  //   service
+  //     .setNotes(data)
+  //     .then((res) => {
+  //       if (res.data.status === 200) {
+  //         dispatch(addNote(res.data.message))
+  //       } else {
+  //         console.log(res);
+  //       }
+  //     })
+  //     .catch((err) => console.log(err.message));
+  // };
+
 
   const showTitleField = () => {
     setTitleFieldVisible(true);
@@ -20,9 +40,10 @@ export default function AddNotes() {
 
   // submit form
   const data = { title: title, content: content };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    createNotes(data);
+    createNewNotes(data);
     history.push("/dashboard");
   };
 
@@ -57,6 +78,20 @@ export default function AddNotes() {
           <div className="iconsAndAddNote">
             <div className="signIn" align="left">
               {titleFieldVisible && <NotesFunctionIcons />}
+            </div>
+            <div className="submit" align="right">
+              {titleFieldVisible && (
+                <Button
+                  variant="text"
+                  id="submitButton"
+                  type="submit"
+                  onClick={handleSubmit}
+                  style={{ textTransform: "none" }}
+                  color="inherit"
+                >
+                  <b>Submit</b>
+                </Button>
+              )}
             </div>
             <div className="create" align="right">
               {titleFieldVisible && (
