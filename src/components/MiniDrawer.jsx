@@ -15,6 +15,8 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 const drawerWidth = 200;
 const openedMixin = (theme) => ({
   width: drawerWidth,
+  top: "auto",
+  borderRight: "0px",
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -23,6 +25,8 @@ const openedMixin = (theme) => ({
 });
 
 const closedMixin = (theme) => ({
+  top: "auto",
+  borderRight: "0px",
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -33,6 +37,15 @@ const closedMixin = (theme) => ({
     width: `calc(${theme.spacing(9)} + 1px)`,
   },
 });
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -80,7 +93,8 @@ export default function MiniDrawer( {handleTitle} )  {
       onMouseOver={handleDrawerOpen}
       onMouseLeave={handleDrawerClose}
     >
-      <List style={{ marginTop: "65px", color: "#202124" }}>
+       <DrawerHeader />
+      <List style={{ color: "#202124" }}>
       <ListItemsColour button onClick={() => handleTitle("FundooNotes")}>
           <ListItemIcon>
             <LightbulbOutlinedIcon />

@@ -7,8 +7,14 @@ import ColorLensOutlinedIcon from "@mui/icons-material/ColorLensOutlined";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
+import Image from "../components/UploadImage";
 
 export default function NotesFunctionIcons() {
+  const addImage = (event) => {
+    event.preventDefault();
+    <Image />
+  }
+
   return (
     <div>
       <Grid>
@@ -21,13 +27,13 @@ export default function NotesFunctionIcons() {
         <IconButton size="small" color="default" sx={{ padding: "9px" }}>
           <ColorLensOutlinedIcon />
         </IconButton>
-        <IconButton size="small" color="default" sx={{ padding: "9px" }}>
-          <InsertPhotoOutlinedIcon />
+        <IconButton size="small" color="default" sx={{ padding: "9px" }} >
+          <InsertPhotoOutlinedIcon onClick={addImage}/>
         </IconButton>
-        <IconButton size="small" color="default" sx={{ padding: "8px" }}>
+        <IconButton size="small" color="default" sx={{ padding: "9px" }}>
           <ArchiveOutlinedIcon />
         </IconButton>
-        <IconButton size="small" color="default" sx={{ padding: "8px" }}>
+        <IconButton size="small" color="default" sx={{ padding: "9px" }}>
           <MoreVertOutlinedIcon />
         </IconButton>
       </Grid>

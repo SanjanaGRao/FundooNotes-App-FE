@@ -14,13 +14,6 @@ export const setSearchedNotes = (notes) => {
   };
 };
 
-export const setNoteTitle = (title) => {
-  return {
-    type: ActionTypes.SET_NOTE_TITLE,
-    payload: title,
-  };
-};
-
 export const addNote = (note) => {
   return {
     type: ActionTypes.ADD_NOTE,
@@ -32,5 +25,12 @@ export const viewList = (flag) => {
   return {
     type: ActionTypes.VIEW_LIST,
     payload: flag,
+  };
+};
+
+export const updateOneNote = (note) => {
+  return {
+    type: ActionTypes.UPDATE_ONE_NOTE,
+    payload: note,
   };
 };

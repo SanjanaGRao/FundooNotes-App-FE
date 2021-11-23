@@ -13,13 +13,14 @@ import InputBase from "@mui/material/InputBase";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import Badge from "@mui/material/Badge";
 import SplitscreenOutlinedIcon from "@mui/icons-material/SplitscreenOutlined";
-import SettingsSharpIcon from "@mui/icons-material/SettingsSharp";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import GridViewIcon from "@mui/icons-material/GridView";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setSearchedNotes } from "../reduxActions/actionsOnNotes";
+import { setSearchedNotes, viewList } from "../reduxActions/actionsOnNotes";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -85,6 +86,7 @@ export default function Appbar( {handleDrawer, title} ) {
   const [search, setSearch] = useState("");
   const myNotes = useSelector((state) => state.allNotes.notes);
   const dispatch = useDispatch();
+  const list = useSelector((state) => state.allNotes.viewList);
 
   const handleSearch = (searchValue) => {
     setSearch(searchValue);
@@ -100,71 +102,89 @@ export default function Appbar( {handleDrawer, title} ) {
       )
     );
   }, [search, myNotes]);
+
+  const handleView = () => {
+    dispatch(viewList());
+  };
+
+  const refreshPage = ()=>{
+    window.location.reload();
+ }
   
   return (
-      <AppBar position="fixed" style={{ background: "#ffffff" }}>
-        <Toolbar style={{ color: "rgba(0, 0, 0, 0.54)" }}>
+    <AppBar position="fixed" style={{ background: "#ffffff", borderBottom:"1px solid #e5e8e9", borderTop:"1px solid #e5e8e9" }}>
+      <Toolbar style={{ color: "rgba(0, 0, 0, 0.54)" }}>
+        <IconButton
+          aria-label="open drawer"
+          edge="start"
+          color="inherit"
+          onClick={handleDrawer}
+          sx={{
+            marginRight: "15px",
+          }}
+        >
+          <MenuIcon sx={{ color: "#5f6368" }} onClick={handleDrawer}/>
+        </IconButton>
+        <Avatar alt="FundooNotes" src={Logo} variant="square" />
+        <Typography
+          variant="h7"
+          noWrap
+          component="div"
+          sx={{ display: { xs: "none", sm: "block" }, marginLeft: "5px" }}
+        >
+          <span className="mainLogoAppBar">{title}</span>
+        </Typography>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search"
+            onChange={(event) => handleSearch(event.target.value)}
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Search>
+        <Box sx={{ flexGrow: 1 }} />
+        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <IconButton size="large" color="inherit">
+            <Badge>
+              <RefreshIcon sx={{ color: "#5f6368" }} onClick={refreshPage} />
+            </Badge>
+          </IconButton>
+          <IconButton size="large" color="inherit">
+            {!list ? (
+              <SplitscreenOutlinedIcon
+                fontSize="medium"
+                onClick={handleView}
+                style={{ marginLeft: "5px" }}
+              />
+            ) : (
+              <GridViewIcon
+                fontSize="medium"
+                onClick={handleView}
+                style={{ marginLeft: "5px" }}
+              />
+            )}
+          </IconButton>
+          <IconButton size="large" color="inherit">
+            <Badge>
+              <SettingsOutlinedIcon sx={{ color: "#5f6368" }} />
+            </Badge>
+          </IconButton>
           <IconButton
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawer}
+            size="large"
+            edge="end"
+            aria-label="account of current user"
+            aria-haspopup="true"
             color="inherit"
             sx={{
-              marginRight: "15px",
+              marginLeft: "25px",
             }}
           >
-            <MenuIcon sx={{ color: "#5f6368" }} />
+            <AccountCircle sx={{ fontSize: 40, color: "#5f6368" }} />
           </IconButton>
-          <Avatar alt="FundooNotes" src={Logo} variant="square" />
-          <Typography
-            variant="h7"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" }, marginLeft: "5px" }}
-          >
-            <span className="mainLogoAppBar">{title}</span>
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search"
-              onChange={(event) => handleSearch(event.target.value)}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton size="large" color="inherit">
-              <Badge>
-                <RefreshIcon sx={{ color: "#5f6368" }} />
-              </Badge>
-            </IconButton>
-            <IconButton size="large" color="inherit">
-              <Badge>
-                <SplitscreenOutlinedIcon sx={{ color: "#5f6368" }} />
-              </Badge>
-            </IconButton>
-            <IconButton size="large" color="inherit">
-              <Badge>
-                <SettingsSharpIcon sx={{ color: "#5f6368" }} />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              color="inherit"
-              sx={{
-                marginLeft: "25px",
-              }}
-            >
-              <AccountCircle sx={{ fontSize: 40, color: "#5f6368" }} />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 }
