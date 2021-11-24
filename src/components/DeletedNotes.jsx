@@ -74,7 +74,7 @@ export default function DeletedNotes() {
                 <Card
                   variant="outlined"
                   justifyContent={viewList ? "center" : null}
-                  sx={{ width: 250, height: 130 }}
+                  sx={{ width: 300, height: 180 }}
                   className="notesCardDelete"
                 >
                   <CardContent>
@@ -85,7 +85,6 @@ export default function DeletedNotes() {
                     </Typography>
 
                     <DeleteForeverIcon
-                      fontSize="small"
                       color="default" 
                       sx={{ padding: "9px" }}
                       onClick={() => {
@@ -94,7 +93,6 @@ export default function DeletedNotes() {
                       }}
                     />
                     <RestoreFromTrashIcon
-                      fontSize="small"
                       color="default" 
                       sx={{ padding: "9px" }}
                       onClick={() => {

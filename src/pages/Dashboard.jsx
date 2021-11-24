@@ -8,11 +8,13 @@ import { notes } from "../service/notesIntegration";
 import { useDispatch } from "react-redux";
 import { setNotes } from "../reduxActions/actionsOnNotes";
 import AddNotes from '../components/AddNotes';
+import DeletedNotes from '../components/DeletedNotes';
 
 
 export default function Dashboard() {
     const [open, setOpen] = useState(false);
     const [title,setTitle] = useState('FundooNotes');
+    const [path,setPath] = useState("");
 
     const dispatch = useDispatch();
 
@@ -47,11 +49,15 @@ export default function Dashboard() {
     return (
       <div>
         <Appbar handleDrawer={handleDrawer} title={title}/>
-        <MiniDrawer open={open}  handleClick={handleClick}/>
-        <AddNotes />
+        <MiniDrawer open={open}  handleClick={handleClick} path={path} setPath={setPath}/>
+        {(path==="trash") ? <DeletedNotes /> :
+        <div> 
+         <AddNotes />
         <Box component="main" sx={{ flexGrow: 1}}>
           <Notes value={false}/>
         </Box>
+        </div>
+       }
       </div>
     );
 }

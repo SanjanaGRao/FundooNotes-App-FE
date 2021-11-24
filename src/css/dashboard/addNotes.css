@@ -61,9 +61,10 @@
   box-sizing: inherit;
   position: relative;
   width: 70%;
-  max-width: 700px;
+  max-width: 610px;
   margin: 0 auto;
-  padding: 1.30em;
+  padding-left: 1.10em;
+  padding-top: 0.5rem;
   background-color: #fff;
   border-radius: 5px;
   z-index: 10;
@@ -91,37 +92,39 @@
 
 input,
 textarea {
-  width: 100%;
+  width: 70%;
   display: block;
   border: 0;
   outline: 0;
   margin: 0;
-  padding: 0;
+  padding-bottom: 0;
   font-size: 16px;
   background-color: transparent;
 }
 input {
   font-family: Product Sans, system, -apple-system, BlinkMacSystemFont, Roboto,
     Helvetica Neue, Segoe UI, Arial, sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 18px;
+}
+
+input.title {
+  padding-bottom: 0.6em;
+  padding-top: 0.1rem;
 }
 
 textarea {
   font-family: Roboto, system, -apple-system, BlinkMacSystemFont, Helvetica Neue,
     Segoe UI, Arial, sans-serif;
   resize: none;
-  line-height: 1.5;
-  min-height: 5em;
   max-height: 30vh;
-  padding-top: 2vh;
-  width: 100%;
+  width: 70%;
 }
 textarea.text-area {
   font-family: Roboto, system, -apple-system, BlinkMacSystemFont, Helvetica Neue,
     Segoe UI, Arial, sans-serif;
-  height: 50%;
-  padding: 12.2px 0 0
+  height: 30%;
+  padding: 0.5px 0px 0;
 }
 .iconsAndAddNote{
   display: inline-block;
@@ -130,18 +133,12 @@ textarea.text-area {
 }
 .signInNew {
   font-family: "Google Sans", Roboto, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   color: #202124;
-  padding: 6px 0;
 }
 
 .createNew {
-  padding-top: 1.4vh;
   padding-left: 2vh;
-}
-
-.submit{
-  padding-top: 7vh;
 }
 
 .submitAndClose{
@@ -150,7 +147,7 @@ textarea.text-area {
   justify-content: space-between;
 }
 
-.icons {
+.noteIcons {
   display: inline-block;
   justify-content: space-between;
 }

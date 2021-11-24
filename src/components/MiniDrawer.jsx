@@ -81,7 +81,7 @@ export default function MiniDrawer( props )  {
       { 
         text: 'Notes', 
         icon: <LightbulbOutlinedIcon/>, 
-        path: '/dashboard' 
+        path: "notes" 
       },
       { 
         text: 'Remainders', 
@@ -101,7 +101,7 @@ export default function MiniDrawer( props )  {
       { 
         text: 'Bin', 
         icon: <DeleteOutlinedIcon />, 
-        path: "/trash"
+        path: "trash"
       },
     ];
   
@@ -139,7 +139,7 @@ export default function MiniDrawer( props )  {
               key={item.text} 
               
               onClick={() =>{ props.handleClick(item.text);
-                history.push(item.path)}
+                props.setPath(item.path)}
                 }
               
               

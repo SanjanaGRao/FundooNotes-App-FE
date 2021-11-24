@@ -69,11 +69,17 @@ const handleDelete = (item) => {
         {myNotes.map((item, singleNote) => {
           if (item.isTrash === false) {
           return (
-            <Grid position="relative" item xs={12} md={viewList ? 8 : 3} key={item._id} >
+            <Grid
+              position="relative"
+              item
+              xs={12}
+              md={viewList ? 8 : 3}
+              key={item._id}
+            >
               <Card
                 variant="outlined"
                 justifyContent={viewList ? "center" : null}
-                sx={{ width: 300, height: 150 }}
+                sx={{height: 180 }}
                 className="notesCard"
                 key={singleNote}
                 onMouseOver={() => {
@@ -92,11 +98,21 @@ const handleDelete = (item) => {
                   <Typography sx={{ mb: 1.2 }} color="text.secondary">
                     {item.content}
                   </Typography>
-                  {mouseHover[singleNote] ? 
-                  (<NotesFunctionIcons /> && <DeleteIcon onClick={()=>{handleDelete(item)}}/>) 
-                  : null}
+                  {mouseHover[singleNote] ? (
+                    <div className="noteIcons">
+                      <div align="left">
+                          <NotesFunctionIcons />
+                      </div>
+                      <div align="right">
+                        <DeleteIcon
+                          onClick={() => {
+                            handleDelete(item);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : null}
                 </CardContent>
-                
               </Card>
             </Grid>
           );
@@ -127,14 +143,6 @@ const handleDelete = (item) => {
             />
           </DialogContent>
           <DialogActions>
-            <Button variant="text"
-                  id="submitButton"
-                  type="submit"
-                  onClick={handleClose}
-                  style={{ textTransform: "none" }}
-                  color="inherit"> 
-                  <b>Close</b> 
-            </Button>
             <Button  variant="text"
                   id="submitButton"
                   type="submit"
