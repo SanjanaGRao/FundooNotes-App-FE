@@ -14,7 +14,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { useHistory } from "react-router-dom";
 
 
-const drawerWidth = 240;
+const drawerWidth = 220;
 const openedMixin = (theme) => ({
   width: drawerWidth,
   top: "auto",
@@ -67,7 +67,6 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function MiniDrawer( props )  {
-    let history = useHistory();
     const [open, setOpen] = useState(false);
     const handleDrawerOpen = () =>  {
       setOpen(true);
