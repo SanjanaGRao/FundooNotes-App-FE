@@ -1,0 +1,90 @@
+.trash-text{
+    direction: ltr;
+    font-family: 'Roboto',arial,sans-serif;
+    text-align: center;
+    color: #202124;
+    cursor: default;
+    display: flex;
+    font-size: 17px;
+    font-style: italic;
+    align-items: center;
+    justify-content: center;
+    padding-top: 24px;
+    padding-bottom: 8px;
+  }
+  .trash-text-out{
+    color: #202124;
+    direction: ltr;
+    font-family: 'Roboto',arial,sans-serif;
+    font-size: 15px;
+    display: table;
+    height: 100%;
+    width: 100%;
+    padding-top: 24px;
+    padding-bottom: 8px
+  }
+  .empty-trash{
+    direction: ltr;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    outline: none!important;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    letter-spacing: .01785714em;
+    font-family: 'Google Sans',Roboto,Arial,sans-serif;
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    height: 36px;
+    padding: 8px 24px;
+    border-radius: 4px;
+    bottom: 0;
+    font-style: normal;
+    position: relative;
+    color: #1a73e8;
+    border: none;
+    outline: none;
+    background-color:#0000
+  }
+  .trash-content{
+    color: #202124;
+    direction: ltr;
+    font-family: 'Roboto',arial,sans-serif;
+    font-size: 15px;
+    background-color: transparent;
+    margin: 0 auto;
+    width: 784px;
+  }
+  .trash{
+    color: #202124;
+    direction: ltr;
+    font-family: 'Roboto',arial,sans-serif;
+    font-size: 15px;
+    min-width: 0;
+    width: 100%;
+  }
+  .notesCardDelete{
+    color: #202124;
+    direction: ltr;
+    font-family: 'Roboto',arial,sans-serif;
+    font-size: 5px;
+    pointer-events: auto;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+    transition-duration: 0.218s;
+    transition-property: background,border,opacity,box-shadow,transform;
+    transition-timing-function: ease-in;
+    background-color: #fff;
+    border-color: #e0e0e0;
+    
+}
+.mainPage {
+    padding-top: 10vh;
+    padding-left: 18vh;
+}

@@ -12,10 +12,10 @@ import DialogContent from "@mui/material/DialogContent";
 import { updateNotes } from "../service/notesIntegration";
 import { useDispatch } from "react-redux";
 import { updateOneNote } from "../reduxActions/actionsOnNotes";
-import { styled } from "@mui/material/styles";
-import { width } from "@mui/system";
+import DeleteIcon from "@mui/icons-material/Delete";
+import "../css/dashboard/addNotes.css";
 
-const Notes = () => {
+const Notes = ({value}) => {
   const myNotes = useSelector((state) => state.allNotes.searchedNotes);
   const viewList = useSelector((state) => state.allNotes.viewList);
   const [mouseHover, setMouseHover] = React.useState(false);
@@ -25,10 +25,10 @@ const Notes = () => {
   const [noteId, setNoteId] = React.useState("");
   const dispatch = useDispatch();
 
-
   const data = {
     title: title,
-    content: content
+    content: content,
+    isTrash:false
   };
 
   const handleClickOpen = (item) => {
@@ -51,12 +51,25 @@ const Notes = () => {
     handleClose();
   };
 
+const handleDelete = (item) => {
+  const dataDelete = {
+      title: item.title,
+      content: item.content,
+      isTrash:true
+  };
+  updateNotes(dataDelete, item._id).then((res) => {
+      dispatch(updateOneNote(res))
+  }).catch((err) => console.log(err.message));
+}
+
   return myNotes.length > 0 ? (
+    <div className="mainNew">
     <Box sx={{ mx: "5px", transform: "scale(0.8)" }}>
       <Grid container spacing={3} justifyContent={viewList ? "center" : null}>
         {myNotes.map((item, singleNote) => {
+          if (item.isTrash === false) {
           return (
-            <Grid item xs={12} md={viewList ? 8 : 3} key={item._id} >
+            <Grid position="relative" item xs={12} md={viewList ? 8 : 3} key={item._id} >
               <Card
                 variant="outlined"
                 justifyContent={viewList ? "center" : null}
@@ -79,11 +92,15 @@ const Notes = () => {
                   <Typography sx={{ mb: 1.2 }} color="text.secondary">
                     {item.content}
                   </Typography>
-                  {mouseHover[singleNote] ? <NotesFunctionIcons /> : null}
+                  {mouseHover[singleNote] ? 
+                  (<NotesFunctionIcons /> && <DeleteIcon onClick={()=>{handleDelete(item)}}/>) 
+                  : null}
                 </CardContent>
+                
               </Card>
             </Grid>
           );
+        }
         })}
       </Grid>
       <div>
@@ -130,6 +147,7 @@ const Notes = () => {
         </Dialog>
       </div>
     </Box>
+    </div>
   ) : (
     <span>No matching results.</span>
   );

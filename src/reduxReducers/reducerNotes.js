@@ -3,10 +3,10 @@ import { ActionTypes } from "../reduxConstants/actionTypes";
 const initialState = {
   notes: [],
   searchedNotes: [],
-  viewList:false
+  viewList: false,
 };
 
-export const reducerForNotes = (state = initialState, { type, payload } ) => {
+export const reducerForNotes = (state = initialState, { type, payload }) => {
   switch (type) {
     case ActionTypes.SET_ALL_NOTES:
       return { ...state, notes: payload };
@@ -26,6 +26,11 @@ export const reducerForNotes = (state = initialState, { type, payload } ) => {
       );
       newNote[index] = payload.data;
       return { ...state, notes: newNote };
+    case ActionTypes.DELETE_ONE_NOTE:
+      return {
+        ...state,
+        notes: state.notes.filter((item) => item._id !== payload),
+      };
     default:
       return state;
   }

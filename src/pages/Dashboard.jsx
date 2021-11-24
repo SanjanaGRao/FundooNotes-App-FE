@@ -9,14 +9,15 @@ import { useDispatch } from "react-redux";
 import { setNotes } from "../reduxActions/actionsOnNotes";
 import AddNotes from '../components/AddNotes';
 
+
 export default function Dashboard() {
     const [open, setOpen] = useState(false);
-    const [title,setTitle] = useState('FundooNotes')
+    const [title,setTitle] = useState('FundooNotes');
 
     const dispatch = useDispatch();
 
-    const handleTitle = (title) => {
-      setTitle(title);
+    const handleClick=(title)=>{
+      setTitle(title) ;
     }
 
     useEffect(() => {
@@ -46,10 +47,10 @@ export default function Dashboard() {
     return (
       <div>
         <Appbar handleDrawer={handleDrawer} title={title}/>
-        <MiniDrawer open={open}  handleTitle={handleTitle} />
+        <MiniDrawer open={open}  handleClick={handleClick}/>
         <AddNotes />
         <Box component="main" sx={{ flexGrow: 1}}>
-          <Notes />
+          <Notes value={false}/>
         </Box>
       </div>
     );

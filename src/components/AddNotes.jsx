@@ -69,7 +69,7 @@ export default function AddNotes() {
           />
           <div className="iconsAndAddNote">
             <div className="icons">
-              <div className="signIn" align="left">
+              <div className="signInNew" align="left">
                 {titleFieldVisible && <NotesFunctionIcons />}
               </div>
             </div>
@@ -88,7 +88,7 @@ export default function AddNotes() {
                   </Button>
                 )}
               </div>
-              <div className="create" align="right">
+              <div className="createNew" align="right">
                 {titleFieldVisible && (
                   <Button
                     variant="text"

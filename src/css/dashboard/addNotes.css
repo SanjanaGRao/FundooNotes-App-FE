@@ -18,7 +18,7 @@
   direction: ltr;
   font-family: "Roboto", arial, sans-serif;
   font-size: 15px;
-  pointer-events: auto;
+  /* pointer-events: auto; */
   border: 1px solid transparent;
   box-sizing: border-box;
   overflow: hidden;
@@ -48,7 +48,6 @@
   font-size: 15px;
   background-color: transparent;
   margin: 0 auto;
-  pointer-events: none;
   padding: 20px;
 }
 
@@ -129,14 +128,14 @@ textarea.text-area {
   display: flex;
   justify-content: space-between;
 }
-.signIn {
+.signInNew {
   font-family: "Google Sans", Roboto, Arial, sans-serif;
   font-size: 14px;
   color: #202124;
   padding: 6px 0;
 }
 
-.create {
+.createNew {
   padding-top: 1.4vh;
   padding-left: 2vh;
 }
@@ -154,5 +153,9 @@ textarea.text-area {
 .icons {
   display: inline-block;
   justify-content: space-between;
+}
+
+.mainNew{
+  padding-left: 18vh;
 }
 

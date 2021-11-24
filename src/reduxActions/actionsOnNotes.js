@@ -34,3 +34,10 @@ export const updateOneNote = (note) => {
     payload: note,
   };
 };
+
+export const deleteOneNote = (noteId) => {
+  return {
+    type: ActionTypes.DELETE_ONE_NOTE,
+    payload: noteId,
+  };
+};

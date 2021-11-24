@@ -1,9 +1,14 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
-import React from 'react';
+import App from "./App";
+import { mount,shallow } from "enzyme";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("Counter Testing", () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(<App />);
+  });
+
+  test("render the title ", () => {
+    expect(wrapper.find("h1").text()).toContain("Hello");
+  });
+
 });
