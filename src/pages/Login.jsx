@@ -37,7 +37,6 @@ export default function Login() {
         email: email,
         password: password,
       });
-      alert("Successfully Logged In");
       window.location = "/dashboard";
     }
   };
