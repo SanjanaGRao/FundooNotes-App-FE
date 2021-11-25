@@ -11,8 +11,6 @@ import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import Box from '@mui/material/Box';
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import { useHistory } from "react-router-dom";
-
 
 const drawerWidth = 220;
 const openedMixin = (theme) => ({
@@ -93,7 +91,7 @@ export default function MiniDrawer( props )  {
         path: '/create' 
       },
       { 
-        text: 'Archieve', 
+        text: 'Archive', 
         icon: < ArchiveOutlinedIcon/>, 
         path: '/login' 
       },

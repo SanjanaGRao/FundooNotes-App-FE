@@ -9,7 +9,7 @@
   font-style: italic;
   align-items: center;
   justify-content: center;
-  padding-top: 10px;
+  /* padding-top: 10px; */
 }
 .trash-text-out {
   color: #202124;
@@ -20,7 +20,6 @@
   height: 100%;
   width: 100%;
   padding-top: 24px;
-  padding-bottom: 8px;
 }
 .empty-trash {
   direction: ltr;

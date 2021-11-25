@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import Appbar from "../components/Appbar";
-import MiniDrawer from "../components/MiniDrawer";
+import Appbar from "./Appbar";
+import MiniDrawer from "./MiniDrawer";
 import { notes } from "../service/notesIntegration";
 import { useDispatch } from "react-redux";
 import { setNotes } from "../reduxActions/actionsOnNotes";
-import DeletedNotes from "../components/DeletedNotes";
+import DeletedNotes from "./DeletedNotes";
 
 export default function Bin() {
   const dispatch = useDispatch();

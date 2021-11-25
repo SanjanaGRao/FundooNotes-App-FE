@@ -3,6 +3,7 @@
   direction: ltr;
   font-family: "Roboto", arial, sans-serif;
   font-size: 15px;
+  min-height: 11em;
   border: 1px solid transparent;
   box-sizing: border-box;
   overflow: hidden;
@@ -41,7 +42,7 @@
   box-sizing: inherit;
   position: relative;
   width: 70%;
-  max-width: 610px;
+  max-width: 645px;
   margin: 0 auto;
   padding-left: 1.1em;
   padding-top: 0.5rem;
@@ -72,7 +73,7 @@
 
 input,
 textarea {
-  width: 70%;
+  width: 100%;
   display: block;
   border: 0;
   outline: 0;
@@ -98,7 +99,7 @@ textarea {
     Segoe UI, Arial, sans-serif;
   resize: none;
   max-height: 30vh;
-  width: 70%;
+  width: 100%;
 }
 textarea.text-area {
   font-family: Roboto, system, -apple-system, BlinkMacSystemFont, Helvetica Neue,
@@ -137,6 +138,13 @@ textarea.text-area {
 }
 
 .css-17a4ieo-MuiPaper-root-MuiCard-root:hover, .css-17a4ieo-MuiPaper-root-MuiCard-root:focus {
+  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+  -webkit-box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+  border: solid transparent;
+  border-width: 1px 1px 1px 6px;
+}
+.css-1v5z4dq-MuiPaper-root-MuiCard-root:focus,
+.css-1v5z4dq-MuiPaper-root-MuiCard-root:hover {
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
   -webkit-box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
   border: solid transparent;

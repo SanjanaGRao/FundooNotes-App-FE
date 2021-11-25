@@ -1,23 +1,29 @@
-import { Grid, Card, Typography, Button, Box } from "@mui/material";
+import { Grid, Card, Typography, Button, Box, IconButton } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import React from "react";
 import { useSelector } from "react-redux";
+import Snackbar from "@mui/material/Snackbar";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import RestoreFromTrashOutlinedIcon from "@mui/icons-material/RestoreFromTrashOutlined";
 import { useDispatch } from "react-redux";
 import { updateOneNote, deleteOneNote } from "../reduxActions/actionsOnNotes";
 import { deleteNotes, updateNotes } from "../service/notesIntegration";
 import "../css/dashboard/deleteNotes.css";
+import CloseIcon from "@material-ui/icons/Close";
 
 export default function DeletedNotes() {
   const dispatch = useDispatch();
   const viewList = useSelector((state) => state.allNotes.viewList);
+  const [hover, setHover] = React.useState([]);
+  const [open, setOpen] = React.useState(false);
+  const [itemRemoved,setItemRemoved]=React.useState("");
 
   const handleRestore = (item) => {
     const data = {
       title: item.title,
       content: item.content,
       isTrash: false,
+      color: item.color
     };
     updateNotes(data, item._id)
       .then((res) => {
@@ -28,12 +34,32 @@ export default function DeletedNotes() {
   const handleDelete = (item) => {
     deleteNotes(item._id)
       .then((res) => {
+        setOpen(true);
         dispatch(deleteOneNote(item._id));
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const undoRestore=(itemRemoved)=>{
+    const dataRestore = {
+        title: itemRemoved.title,
+        content: itemRemoved.content,
+        isTrash: true,
+        color:itemRemoved.color
+    };
+    updateNotes(dataRestore, itemRemoved._id).then((res) => {
+        dispatch(updateOneNote(res))
+        setOpen(true)
+    }).catch((err) => console.log(err.message));
+}
+
+  const handleToClose = (event, reason) => {
+    if ("clickaway" == reason) return;
+    setOpen(false);
+  };
+
   const myNotes = useSelector((state) => state.allNotes.searchedNotes);
   console.log(myNotes);
   const emptyTrash = () => {
@@ -61,11 +87,10 @@ export default function DeletedNotes() {
       </div>
       <Box sx={{ mx: "5px", transform: "scale(0.8)" }}>
         <Grid container spacing={3} justifyContent={viewList ? "center" : null}>
-          {myNotes.map((item) => {
+          {myNotes.map((item, index) => {
             if (item.isTrash === true) {
               return (
                 <Grid
-                  position="relative"
                   item
                   xs={12}
                   md={viewList ? 8 : 3}
@@ -73,9 +98,15 @@ export default function DeletedNotes() {
                 >
                   <Card
                     variant="outlined"
+                    style={{background:item.color}}
                     justifyContent={viewList ? "center" : null}
-                    sx={{ width: 300, height: 180 }}
                     className="notesCardDelete"
+                    onMouseEnter={() => {
+                      setHover({ [index]: true });
+                    }}
+                    onMouseLeave={() => {
+                      setHover({ [index]: false });
+                    }}
                   >
                     <CardContent>
                       <Typography variant="h5">{item.title}</Typography>
@@ -84,31 +115,61 @@ export default function DeletedNotes() {
                         {item.content}
                       </Typography>
                       <div align="left">
-                      <DeleteForeverOutlinedIcon
-                        fontSize="medium"
-                        color="inherit"
-                        sx={{ paddingTop: "25px", paddingRight: "125px" }}
-                        onClick={() => {
-                          console.log(item);
-                          handleDelete(item);
-                        }}
-                      />
-                      <RestoreFromTrashOutlinedIcon
-                        fontSize="medium"
-                        color="inherit"
-                        sx={{ paddingTop: "25px", paddingRight: "70px" }}
-                        onClick={() => {
-                          handleRestore(item);
-                        }}
-                      />
+                        {hover[index] ? (
+                          <div className="delete-icons">
+                            <IconButton
+                              title="Delete forever"
+                              fontSize="large"
+                              onClick={() => {
+                                handleDelete(item);
+                              }}
+                            >
+                              <DeleteForeverOutlinedIcon fontSize="large" />
+                            </IconButton>
+                            <IconButton
+                              title="Restore"
+                              fontSize="large"
+                              onClick={() => {
+                                handleRestore(item);
+                              }}
+                            >
+                              <RestoreFromTrashOutlinedIcon fontSize="large" />
+                            </IconButton>
+                            <Snackbar
+                                            anchorOrigin={{
+                                                horizontal: "right",
+                                                vertical: "bottom",
+                                            }}
+                                            open={open}
+                                            autoHideDuration={5000}
+                                            message="Note restored"
+                                            onClose={handleToClose}
+                                            action={
+                                            <div>
+                                            <Button variant="text" onClick={()=>{undoRestore(itemRemoved)}}>UNDO</Button>
+                                            <CloseIcon fontSize="small"  onClick={handleToClose}/></div>
+                                            }
+                                        />
+                          </div>
+                        ) : null}
                       </div>
                     </CardContent>
                   </Card>
                 </Grid>
               );
             }
-          })}{" "}
+          })}
         </Grid>
+        <Snackbar
+          anchorOrigin={{
+            horizontal: "right",
+            vertical: "top",
+          }}
+          open={open}
+          autoHideDuration={5000}
+          message="Note deleted permanently"
+          onClose={handleToClose}
+        />
       </Box>
     </div>
   );

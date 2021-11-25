@@ -1,16 +1,30 @@
 import React, { useState } from "react";
 import { createNewNotes } from "../service/notesIntegration";
-import { Button } from "@mui/material";
+import { Button, Grid, IconButton } from "@mui/material";
 import "../css/dashboard/addNotes.css";
-import NotesFunctionIcons from "../components/NotesFunctionIcons";
+import ColorLensOutlinedIcon from "@mui/icons-material/ColorLensOutlined";
 import { useDispatch } from "react-redux";
 import { addNote } from "../reduxActions/actionsOnNotes";
+import ColorPalette from "./ColorPalette";
+import Popover from "@mui/material/Popover";
+import Brightness1Icon from "@mui/icons-material/Brightness1";
 
 export default function AddNotes() {
   const [titleFieldVisible, setTitleFieldVisible] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const dispatch = useDispatch();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [color, setColor] = React.useState("White");
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   const showTitleField = () => {
     setTitleFieldVisible(true);
@@ -20,7 +34,7 @@ export default function AddNotes() {
   };
 
   // submit form
-  const data = { title: title, content: content };
+  const data = { title: title, content: content, color: color };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,7 +50,12 @@ export default function AddNotes() {
       .catch((err) => console.log(err.message));
     setTitle("");
     setContent("");
+    setColor("White");
     hideTitleField();
+  };
+
+  const handleColor = (colorItem) => {
+    setColor(colorItem);
   };
 
   return (
@@ -46,7 +65,7 @@ export default function AddNotes() {
           <div className="backdrop" onClick={hideTitleField} />
         )}
 
-        <form className="create-note">
+        <form className="create-note" style={{ background: color }}>
           {titleFieldVisible && (
             <input
               className="title"
@@ -70,7 +89,49 @@ export default function AddNotes() {
           <div className="iconsAndAddNote">
             <div className="icons">
               <div className="signInNew" align="left">
-                {titleFieldVisible && <NotesFunctionIcons />}
+                {titleFieldVisible && (
+                  <div>
+                    <IconButton onClick={handleClick}>
+                      <ColorLensOutlinedIcon />
+                    </IconButton>
+                    <Popover
+                      id={id}
+                      open={open}
+                      anchorEl={anchorEl}
+                      onClose={handleClose}
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "left",
+                      }}
+                    >
+                      {" "}
+                      <Grid container sx={{ p: 1 }}>
+                        {ColorPalette.map((colorItem, index) => {
+                          return (
+                            <Grid
+                              item
+                              xs={12}
+                              sm={6}
+                              md={3}
+                              sx={{ width: "11px" }}
+                              key={index}
+                            >
+                              <IconButton
+                                onClick={() => {
+                                  handleColor(colorItem.colorCode);
+                                }}
+                              >
+                                <Brightness1Icon
+                                  style={{ color: colorItem.colorCode }}
+                                />
+                              </IconButton>
+                            </Grid>
+                          );
+                        })}{" "}
+                      </Grid>
+                    </Popover>
+                  </div>
+                )}
               </div>
             </div>
             <div className="submitAndClose">
