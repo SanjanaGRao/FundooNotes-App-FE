@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import AddAlertOutlinedIcon from "@mui/icons-material/AddAlertOutlined";
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
@@ -77,7 +77,7 @@ export default function NotesFunctionIcons(props) {
   const id = openA ? "simple-popover" : undefined;
 
   return (
-    <div>
+    <Box>
       <Grid>
         <IconButton size="small" color="default" sx={{ padding: "8px" }}>
           <AddAlertOutlinedIcon />
@@ -140,12 +140,12 @@ export default function NotesFunctionIcons(props) {
           onClick={handleDelete}
         >
           <DeleteOutlinedIcon />
+          
         </IconButton>
-      </Grid>
-      <Snackbar
+        <Snackbar
         anchorOrigin={{
-          horizontal: "left",
-          vertical: "top",
+          horizontal: "right",
+          vertical: "bottom",
         }}
         open={openSnackbar}
         autoHideDuration={5000}
@@ -153,6 +153,7 @@ export default function NotesFunctionIcons(props) {
         onClose={handleToClose}
         action={<CloseIcon fontSize="small" onClick={handleToClose} />}
       />
-    </div>
+      </Grid>
+    </Box>
   );
 }

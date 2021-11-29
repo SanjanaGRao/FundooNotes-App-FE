@@ -16,14 +16,14 @@ export default function DeletedNotes() {
   const viewList = useSelector((state) => state.allNotes.viewList);
   const [hover, setHover] = React.useState([]);
   const [open, setOpen] = React.useState(false);
-  const [itemRemoved,setItemRemoved]=React.useState("");
+  const [itemRemoved, setItemRemoved] = React.useState("");
 
   const handleRestore = (item) => {
     const data = {
       title: item.title,
       content: item.content,
       isTrash: false,
-      color: item.color
+      color: item.color,
     };
     updateNotes(data, item._id)
       .then((res) => {
@@ -42,18 +42,20 @@ export default function DeletedNotes() {
       });
   };
 
-  const undoRestore=(itemRemoved)=>{
+  const undoRestore = (itemRemoved) => {
     const dataRestore = {
-        title: itemRemoved.title,
-        content: itemRemoved.content,
-        isTrash: true,
-        color:itemRemoved.color
+      title: itemRemoved.title,
+      content: itemRemoved.content,
+      isTrash: true,
+      color: itemRemoved.color,
     };
-    updateNotes(dataRestore, itemRemoved._id).then((res) => {
-        dispatch(updateOneNote(res))
-        setOpen(true)
-    }).catch((err) => console.log(err.message));
-}
+    updateNotes(dataRestore, itemRemoved._id)
+      .then((res) => {
+        dispatch(updateOneNote(res));
+        setOpen(true);
+      })
+      .catch((err) => console.log(err.message));
+  };
 
   const handleToClose = (event, reason) => {
     if ("clickaway" == reason) return;
@@ -85,20 +87,15 @@ export default function DeletedNotes() {
           </Button>
         </div>
       </div>
-      <Box sx={{ mx: "5px", transform: "scale(0.8)" }}>
-        <Grid container spacing={3} justifyContent={viewList ? "center" : null}>
+      <Box sx={{ mx: "5px", transform: "scale(0.85)" }}>
+        <Grid container spacing={5} justifyContent={viewList ? "center" : null}>
           {myNotes.map((item, index) => {
             if (item.isTrash === true) {
               return (
-                <Grid
-                  item
-                  xs={12}
-                  md={viewList ? 8 : 3}
-                  key={item._id}
-                >
+                <Grid item xs={12} md={viewList ? 8 : 3} key={item._id}>
                   <Card
                     variant="outlined"
-                    style={{background:item.color}}
+                    style={{ background: item.color }}
                     justifyContent={viewList ? "center" : null}
                     className="notesCardDelete"
                     onMouseEnter={() => {
@@ -136,20 +133,31 @@ export default function DeletedNotes() {
                               <RestoreFromTrashOutlinedIcon fontSize="large" />
                             </IconButton>
                             <Snackbar
-                                            anchorOrigin={{
-                                                horizontal: "right",
-                                                vertical: "bottom",
-                                            }}
-                                            open={open}
-                                            autoHideDuration={5000}
-                                            message="Note restored"
-                                            onClose={handleToClose}
-                                            action={
-                                            <div>
-                                            <Button variant="text" onClick={()=>{undoRestore(itemRemoved)}}>UNDO</Button>
-                                            <CloseIcon fontSize="small"  onClick={handleToClose}/></div>
-                                            }
-                                        />
+                              anchorOrigin={{
+                                horizontal: "right",
+                                vertical: "bottom",
+                              }}
+                              open={open}
+                              autoHideDuration={5000}
+                              message="Note restored"
+                              onClose={handleToClose}
+                              action={
+                                <div>
+                                  <Button
+                                    variant="text"
+                                    onClick={() => {
+                                      undoRestore(itemRemoved);
+                                    }}
+                                  >
+                                    UNDO
+                                  </Button>
+                                  <CloseIcon
+                                    fontSize="small"
+                                    onClick={handleToClose}
+                                  />
+                                </div>
+                              }
+                            />
                           </div>
                         ) : null}
                       </div>
@@ -157,20 +165,21 @@ export default function DeletedNotes() {
                   </Card>
                 </Grid>
               );
+
             }
           })}
         </Grid>
-        <Snackbar
-          anchorOrigin={{
-            horizontal: "right",
-            vertical: "top",
-          }}
-          open={open}
-          autoHideDuration={5000}
-          message="Note deleted permanently"
-          onClose={handleToClose}
-        />
       </Box>
+      <Snackbar
+        anchorOrigin={{
+          horizontal: "right",
+          vertical: "bottom",
+        }}
+        open={open}
+        autoHideDuration={5000}
+        message="Note deleted permanently"
+        onClose={handleToClose}
+      />
     </div>
   );
 }

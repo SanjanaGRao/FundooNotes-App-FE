@@ -123,9 +123,6 @@ export default function MiniDrawer(props) {
     &:hover {
       background-color: #e6e8e6;
     }
-    &:click {
-      background-color: #e6e8e6;
-    }
     &:focus {
       background-color: #f5cb90;
     }
