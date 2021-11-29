@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { Grid, Typography, Button } from "@mui/material";
+import { Grid, Typography, Button, CardMedia } from "@mui/material";
 import { useSelector } from "react-redux";
 import NotesFunctionIcons from "../components/NotesFunctionIcons";
 import "../css/dashboard/addNotes.css";
@@ -24,12 +24,14 @@ const Notes = ({ value }) => {
   const [noteId, setNoteId] = React.useState("");
   const dispatch = useDispatch();
   const [color, setColor] = React.useState("White");
+  const [image,setImage]=React.useState("");
 
   const data = {
     title: title,
     content: content,
     isTrash: false,
     color: color,
+    profileImg:image,
   };
 
   const handleClickOpen = (item) => {
@@ -38,6 +40,7 @@ const Notes = ({ value }) => {
     setNoteId(item._id);
     setOpen(true);
     setColor(item.color);
+    setImage(item.profileImg);
   };
 
   const handleClose = () => {
@@ -80,12 +83,21 @@ const Notes = ({ value }) => {
                       setMouseHover({ [singleNote]: false });
                     }}
                   >
+                   
                     <CardContent>
                       <div
                         onClick={() => {
                           handleClickOpen(item);
                         }}
                       >
+                         {(item.profileImg !== undefined ) ? (
+                    <CardMedia
+                      component="img"
+                      image={`http://localhost:4000/images/${item.profileImg}`}
+                      alt="dish"style={{  maxwidth: 238,
+                        maxHeight: 238, paddingBottom: 15 }}
+                    />
+                  ) : null}
                         <Typography variant="h5">{item.title}</Typography>
                         <br />
                         <Typography sx={{ mb: 1.2 }} color="text.secondary">

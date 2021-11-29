@@ -6,7 +6,7 @@ import {
 } from "../helper/axiosUrl";
 import { getToken } from "../utils/userTokens";
 
-const token = getToken();
+const token = getToken("token");
 
 const notes = () => {
 let url = "http://localhost:4000/notes";

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { createNewNotes } from "../service/notesIntegration";
-import { Button, Grid, IconButton } from "@mui/material";
+import { Button, Grid, IconButton, CardMedia } from "@mui/material";
 import "../css/dashboard/addNotes.css";
 import ColorLensOutlinedIcon from "@mui/icons-material/ColorLensOutlined";
 import { useDispatch } from "react-redux";
@@ -8,6 +8,7 @@ import { addNote } from "../reduxActions/actionsOnNotes";
 import ColorPalette from "./ColorPalette";
 import Popover from "@mui/material/Popover";
 import Brightness1Icon from "@mui/icons-material/Brightness1";
+import ImageIcon from '@mui/icons-material/Image';
 
 export default function AddNotes() {
   const [titleFieldVisible, setTitleFieldVisible] = useState(false);
@@ -16,6 +17,7 @@ export default function AddNotes() {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [color, setColor] = React.useState("White");
+  const [file,setFile]=useState('');
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -33,12 +35,16 @@ export default function AddNotes() {
     setTitleFieldVisible(false);
   };
 
-  // submit form
-  const data = { title: title, content: content, color: color };
 
   const handleSubmit = (event) => {
+    const formData = new FormData()
+    formData.append('title', title)
+    formData.append('content', content)
+    formData.append('color', color)
+    formData.append('profileImg', file)
     event.preventDefault();
-    createNewNotes(data)
+    console.log(formData);
+    createNewNotes(formData)
       .then((res) => {
         console.log(res);
         if (res.data.status === 200) {
@@ -51,6 +57,7 @@ export default function AddNotes() {
     setTitle("");
     setContent("");
     setColor("White");
+    setFile("");
     hideTitleField();
   };
 
@@ -60,12 +67,19 @@ export default function AddNotes() {
 
   return (
     <div>
-      <div className="create-form" style={{ paddingTop: 100, paddingLeft:80 }}>
+      <div className="create-form" style={{ paddingTop: 110, paddingLeft: 80 }}>
         {titleFieldVisible && (
           <div className="backdrop" onClick={hideTitleField} />
         )}
 
         <form className="create-note" style={{ background: color }}>
+          {file !== "" && { titleFieldVisible } ? (
+            <CardMedia
+              component="img"
+              image={URL.createObjectURL(file)}
+              alt="dish"
+            />
+          ) : null}
           {titleFieldVisible && (
             <input
               className="title"
@@ -130,6 +144,22 @@ export default function AddNotes() {
                         })}{" "}
                       </Grid>
                     </Popover>
+                    <Fragment>
+                      <input
+                        accept="image/*"
+                        type="file"
+                        onChange={(e) => {
+                          setFile(e.target.files[0]);
+                        }}
+                        id="icon-button-file"
+                        style={{ display: "none" }}
+                      />
+                      <label htmlFor="icon-button-file">
+                        <Button component="span" size="large">
+                          <ImageIcon color="action" />
+                        </Button>
+                      </label>
+                    </Fragment>
                   </div>
                 )}
               </div>
@@ -141,7 +171,7 @@ export default function AddNotes() {
                     variant="text"
                     id="submitButton"
                     type="submit"
-                    onClick={handleSubmit}
+                    onClick={(e) => {handleSubmit(e)} }
                     style={{ textTransform: "none", marginLeft: 250 }}
                     color="inherit"
                   >

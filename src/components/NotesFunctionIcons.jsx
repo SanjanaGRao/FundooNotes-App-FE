@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useState } from "react";
-import { Grid, Box } from "@mui/material";
+import { useState, Fragment } from "react";
+import { Grid, Box, CardMedia } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import AddAlertOutlinedIcon from "@mui/icons-material/AddAlertOutlined";
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
@@ -22,6 +22,7 @@ export default function NotesFunctionIcons(props) {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [color, setColor] = useState("White");
+  const [image,setImage]=React.useState("");
 
   const dispatch = useDispatch();
 
@@ -31,6 +32,7 @@ export default function NotesFunctionIcons(props) {
       content: props.item.content,
       isTrash: true,
       color: props.item.color,
+      profileImg:props.item.image,
     };
     updateNotes(dataDelete, props.item._id)
       .then((res) => {
@@ -44,12 +46,13 @@ export default function NotesFunctionIcons(props) {
     setOpen(false);
   };
 
-  const handleUpdate = (colorNote) => {
+  const handleUpdate = (colorNote, image) => {
     const dataNotes = {
       title: props.item.title,
       content: props.item.content,
       isTrash: false,
       color: colorNote,
+      profileImg:image,
     };
     console.log(dataNotes);
     console.log(props.item._id);
@@ -75,6 +78,18 @@ export default function NotesFunctionIcons(props) {
   };
   const openA = Boolean(anchorEl);
   const id = openA ? "simple-popover" : undefined;
+
+  const handleImage = (imagef,item) => {
+    console.log("Hi")
+    const formData = new FormData()
+    formData.append('title', props.item.title)
+    formData.append('content', props.item.content)
+    formData.append('color', props.item.color)
+    formData.append('profileImg', imagef)
+    updateNotes(formData, props.item._id).then((res) => {
+        dispatch(updateOneNote(res))
+    }).catch((err) => console.log(err.message));
+}
 
   return (
     <Box>
@@ -127,9 +142,22 @@ export default function NotesFunctionIcons(props) {
             })}
           </Grid>
         </Popover>
-        <IconButton size="small" color="default" sx={{ padding: "8px" }}>
-          <InsertPhotoOutlinedIcon />
+        <Fragment>
+        <input
+          accept="image/*"
+          type="file"
+          onChange={(e)=>{
+              console.log(image)
+            handleImage(e.target.files[0],props.item)}}
+          id="icon-button-file"
+          style={{ display: 'none', }}
+        />
+        <label htmlFor="icon-button-file">
+        <IconButton size="small" color="default" component="span" sx={{ padding: "8px" }} >
+          <InsertPhotoOutlinedIcon color="action" />
         </IconButton>
+        </label>
+      </Fragment>
         <IconButton size="small" color="default" sx={{ padding: "8px" }}>
           <ArchiveOutlinedIcon />
         </IconButton>

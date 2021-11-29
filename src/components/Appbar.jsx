@@ -97,6 +97,8 @@ export default function Appbar({ handleDrawerOpen, title }) {
   const open = Boolean(anchorEl);
   const [signOut, setSignOut] = useState(false);
 
+  let emailAvatar = localStorage.getItem("emailAvatar");
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -127,10 +129,10 @@ export default function Appbar({ handleDrawerOpen, title }) {
     window.location.reload();
   };
 
-  const logoutClick = () => {
-    removeToken();
-    setSignOut(true);
-};
+//   const logoutClick = (e) => {
+//     removeToken();
+//     setSignOut(true);
+// };
 
 
   return (
@@ -211,7 +213,8 @@ export default function Appbar({ handleDrawerOpen, title }) {
               marginLeft: "25px",
             }}
           >
-            <AccountCircle sx={{ fontSize: 40, color: "#5f6368" }} />
+            <Avatar name={emailAvatar} size="32" round={true} />
+            {/* <AccountCircle sx={{ fontSize: 40, color: "#5f6368" }} /> */}
           </IconButton>
           <Menu
             anchorEl={anchorEl}
@@ -245,7 +248,7 @@ export default function Appbar({ handleDrawerOpen, title }) {
               },
             }}
           >
-            <MenuItem onClick={logoutClick} >
+            <MenuItem onClick={()=>{removeToken();setSignOut(true)}}>
               <ListItemIcon >
                 <Logout fontSize="small" />
               </ListItemIcon>

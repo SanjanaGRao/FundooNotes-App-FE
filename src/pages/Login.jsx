@@ -17,6 +17,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import { Link } from "react-router-dom";
 import userPost from "../service/usersApiIntegration";
+import { Redirect } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = React.useState("");
@@ -24,6 +25,11 @@ export default function Login() {
   const [emailNotValid, setEmailNotValid] = React.useState(false);
   const [passwordNotValid, setPasswordNotValid] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
+  const [success,setSuccess] = React.useState(false);
+
+  let EM = email;
+  let PW = password;
+  const datas = { email: EM, password: PW };
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -38,12 +44,10 @@ export default function Login() {
       alert("Login Unsuccessful.");
     }
     else {
-      userPost("users/login", {
-        email: email,
-        password: password,
-      });
-      window.location = "/dashboard";
-    }
+      console.log(datas)
+      userPost("users/login", datas );
+      setSuccess(true);
+    }      
   };
   const handleClickShowPasswords = () => {
     setShowPassword(!showPassword);
@@ -213,6 +217,7 @@ export default function Login() {
                     </div>
                   </div>
                 </div>
+                {success?<Redirect to="/dashboard"/>:null}
               </form>
             </div>
           </div>

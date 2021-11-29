@@ -1,9 +1,9 @@
 import axios from "axios";
 import { setToken } from "../utils/userTokens";
 
-const userConnect = (method, url, infos) => {
+const userConnect = (url, infos) => {
   axios({
-    method: method,
+    method: "post",
     url: url,
     data: infos,
     headers: {
