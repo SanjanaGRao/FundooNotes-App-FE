@@ -60,7 +60,7 @@ export default function AddNotes() {
 
   return (
     <div>
-      <div className="create-form" style={{ paddingTop: 100 }}>
+      <div className="create-form" style={{ paddingTop: 100, paddingLeft:80 }}>
         {titleFieldVisible && (
           <div className="backdrop" onClick={hideTitleField} />
         )}

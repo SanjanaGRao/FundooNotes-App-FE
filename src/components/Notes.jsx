@@ -54,7 +54,7 @@ const Notes = ({ value }) => {
   };
 
   return myNotes.length > 0 ? (
-    <div className="mainNew">
+    // <div className="mainNew">
       <Box sx={{ mx: "3px", transform: "scale(0.85)" }}>
         <Grid container spacing={3} justifyContent={viewList ? "center" : null}>
           {myNotes.map((item, singleNote) => {
@@ -140,7 +140,7 @@ const Notes = ({ value }) => {
           </Dialog>
         </div>
       </Box>
-    </div>
+    // </div>
   ) : (
     <span>No matching results.</span>
   );

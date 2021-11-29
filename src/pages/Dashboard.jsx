@@ -10,11 +10,11 @@ import { setNotes } from "../reduxActions/actionsOnNotes";
 import AddNotes from '../components/AddNotes';
 import DeletedNotes from '../components/DeletedNotes';
 
-
 export default function Dashboard() {
     const [open, setOpen] = useState(false);
     const [title,setTitle] = useState('FundooNotes');
     const [path,setPath] = useState("");
+    const [button, setButton] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -38,17 +38,17 @@ export default function Dashboard() {
         });
     };
 
-    const handleDrawer = () => {
-        setOpen((previousState) => {
-          return !previousState;
-        });
+    const handleDrawerOpen = () => {
+      setOpen((previousState) => {
+        setButton(!button)
+        return !previousState;
+      });
     };
 
-
-
     return (
-      <div>
-        <Appbar handleDrawer={handleDrawer} title={title}/>
+      <Box>
+        <Appbar handleDrawerOpen={handleDrawerOpen} title={title}/>
+        <Box sx={{ display: "flex"}}>
         <MiniDrawer open={open}  handleClick={handleClick} path={path} setPath={setPath}/>
         {(path==="trash") ? <DeletedNotes /> :
         <div> 
@@ -58,6 +58,7 @@ export default function Dashboard() {
         </Box>
         </div>
        }
-      </div>
+       </Box>
+      </Box>
     );
 }

@@ -29,9 +29,14 @@ export default function Login() {
     setShowPassword(!showPassword);
   };
   const handleSubmit = (event) => {
+    let error = false;
     event.preventDefault();
-    if (email === "") setEmailNotValid(true);
-    if (password === "") setPasswordNotValid(true);
+    if (email === "") { setEmailNotValid(true); error=true; }
+    if (password === "") { setPasswordNotValid(true); error=true; }
+    if(error) {
+      console.log("Cannot Log In.");
+      alert("Login Unsuccessful.");
+    }
     else {
       userPost("users/login", {
         email: email,

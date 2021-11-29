@@ -7,8 +7,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
-import Box from '@mui/material/Box';
+import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
+import Box from "@mui/material/Box";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 
@@ -48,6 +48,23 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const Drawer = styled(MuiDrawer, {
+  overrides: {
+    MuiListItem: {
+      root: {
+        "&$selected": {
+          backgroundColor: "red",
+          "&:hover": {
+            backgroundColor: "orange",
+          },
+        },
+      },
+      button: {
+        "&:hover": {
+          backgroundColor: "yellow",
+        },
+      },
+    },
+  },
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   width: drawerWidth,
@@ -64,46 +81,45 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MiniDrawer( props )  {
-    const [open, setOpen] = useState(false);
-    const handleDrawerOpen = () =>  {
-      setOpen(true);
-    };
+export default function MiniDrawer(props) {
+  const [open, setOpen] = useState(false);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
 
-    const handleDrawerClose = () => {
-      setOpen(false);
-    };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
-    const menuItems = [
-      { 
-        text: 'Notes', 
-        icon: <LightbulbOutlinedIcon/>, 
-        path: "notes" 
-      },
-      { 
-        text: 'Remainders', 
-        icon: < NotificationsNoneOutlinedIcon />, 
-        path: '/create' 
-      },
-      { 
-        text: 'Edit labels', 
-        icon: <CreateOutlinedIcon />, 
-        path: '/create' 
-      },
-      { 
-        text: 'Archive', 
-        icon: < ArchiveOutlinedIcon/>, 
-        path: '/login' 
-      },
-      { 
-        text: 'Bin', 
-        icon: <DeleteOutlinedIcon />, 
-        path: "trash"
-      },
-    ];
-  
+  const menuItems = [
+    {
+      text: "Notes",
+      icon: <LightbulbOutlinedIcon />,
+      path: "notes",
+    },
+    {
+      text: "Remainders",
+      icon: <NotificationsNoneOutlinedIcon />,
+      path: "/create",
+    },
+    {
+      text: "Edit labels",
+      icon: <CreateOutlinedIcon />,
+      path: "/create",
+    },
+    {
+      text: "Archive",
+      icon: <ArchiveOutlinedIcon />,
+      path: "/login",
+    },
+    {
+      text: "Bin",
+      icon: <DeleteOutlinedIcon />,
+      path: "trash",
+    },
+  ];
 
-    const ListItemsColour = styled(ListItem)`
+  const ListItemsColour = styled(ListItem)`
     &:hover {
       background-color: #e6e8e6;
     }
@@ -114,41 +130,39 @@ export default function MiniDrawer( props )  {
       background-color: #f5cb90;
     }
     border-radius: 0 25px 25px 0;
-    `;
+  `;
 
   return (
-    <Box sx={
-      {display: 'flex'}
-  } >
-    <Drawer
-      variant="permanent"
-      open={open}
-      onMouseOver={handleDrawerOpen}
-      onMouseLeave={handleDrawerClose}
-    >
-       <DrawerHeader />
-        <List >
+    <Box sx={{ display: "flex" }}>
+      <Drawer
+        variant="permanent"
+        open={open}
+        onMouseOver={handleDrawerOpen}
+        onMouseLeave={handleDrawerClose}
+      >
+        <DrawerHeader />
+        <List>
           {menuItems.map((item) => (
-            <ListItemsColour 
-           
-              button 
-             
-              key={item.text} 
-              
-              onClick={() =>{ props.handleClick(item.text);
-                props.setPath(item.path)}
-                }
-              
-              
-          >
-              <ListItemIcon onClick={() =>{ props.handleClick(item.text);}} >{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text}/>
+            <ListItemsColour
+              button
+              key={item.text}
+              onClick={() => {
+                props.handleClick(item.text);
+                props.setPath(item.path);
+              }}
+            >
+              <ListItemIcon
+                onClick={() => {
+                  props.handleClick(item.text);
+                }}
+              >
+                {item.icon}
+              </ListItemIcon>
+              <ListItemText primary={item.text} />
             </ListItemsColour>
           ))}
         </List>
-        
-        
       </Drawer>
-   </Box>
-    )
+    </Box>
+  );
 }

@@ -21,7 +21,7 @@ import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import userPost from "../service/usersApiIntegration";
 
 export default function CreateAccount() {
@@ -39,19 +39,24 @@ export default function CreateAccount() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     React.useState(false);
+  const [accountCreated,setAccountCreated] = React.useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleSubmit = (event) => {
+    let error = false;
     event.preventDefault();
-    if (!nameValidation.test(firstName)) setFirstNameNotValid(true);
-    if (!nameValidation.test(lastName)) setLastNameNotValid(true);
-    if (!emailValidation.test(email)) setEmailNotValid(true);
-    if (!passwordValidation.test(password)) setPasswordNotValid(true);
+    if (!nameValidation.test(firstName)) { setFirstNameNotValid(true); error=true; } 
+    if (!nameValidation.test(lastName)) { setLastNameNotValid(true); error=true; } 
+    if (!emailValidation.test(email)) { setEmailNotValid(true); error=true; } 
+    if (!passwordValidation.test(password)) { setPasswordNotValid(true); error=true; } 
     if (password !== passwordConfirmation) {
       setPasswordConfirmationNotValid(true);
+      error=true; 
+    } if (error) {
+      console.log("Account could not be created. Please follow th rules mentioned.");
     } else {
       userPost("users", {
         firstName: firstName,
@@ -59,8 +64,7 @@ export default function CreateAccount() {
         email: email,
         password: password,
       });
-      alert("Sucessfully Created your Account.");
-      window.location = "/login";
+      setAccountCreated(true);
     }
   };
 
@@ -213,7 +217,7 @@ export default function CreateAccount() {
                           label="Password"
                           required
                           fullwidth
-                          name="passwordConfirmation"
+                          name="password"
                           color="primary"
                           placeholder="Enter your password"
                         />
@@ -284,6 +288,7 @@ export default function CreateAccount() {
                         <Checkbox
                           value="allowExtraEmails"
                           color="primary"
+                          name="checkbox"
                           onClick={handleClickShowPasswords}
                           onMouseDown={handleMouseDownPassword}
                         />
@@ -313,6 +318,7 @@ export default function CreateAccount() {
                         type="submit"
                         variant="contained"
                         color="primary"
+                        name="createAcc"
                         onClick={handleSubmit}
                       >
                         <b>Create</b>
@@ -330,6 +336,7 @@ export default function CreateAccount() {
                   />
                 </div>
               </div>
+              {accountCreated?<Redirect to="/login"/>:null}
             </form>
           </div>
         </div>
