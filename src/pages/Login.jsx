@@ -27,9 +27,9 @@ export default function Login() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [success,setSuccess] = React.useState(false);
 
-  let EM = email;
-  let PW = password;
-  const datas = { email: EM, password: PW };
+  let Em = email;
+  let Pwd = password;
+  const datas = { email: Em, password: Pwd };
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -45,9 +45,15 @@ export default function Login() {
     }
     else {
       console.log(datas)
-      userPost("users/login", datas );
-      setSuccess(true);
-    }      
+      userPost("users/login", datas )
+      .then((res)=> {
+        if (res.data.status === 200) {
+          localStorage.setItem("emailAvatar",email);
+          setSuccess(true);
+        }
+      })
+      .catch((err)=>{alert(err)});
+    }   
   };
   const handleClickShowPasswords = () => {
     setShowPassword(!showPassword);

@@ -23,7 +23,13 @@ let url = "http://localhost:4000/notes";
 
 const createNewNotes = (data) => {
   let url = "http://localhost:4000/notes";
-  return createNotes(url, data, `bearer ${token}`);
+  return createNotes(url, data, `bearer ${token}`)
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => {
+      throw err;
+    });
 };
 
 const updateNotes = (data, id) => {

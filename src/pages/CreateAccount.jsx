@@ -41,6 +41,17 @@ export default function CreateAccount() {
     React.useState(false);
   const [accountCreated,setAccountCreated] = React.useState(false);
 
+  let fN = firstName;
+  let lN = lastName;
+  let eM = email;
+  let pswd = password;
+  const dataToPass = {
+    firstName: fN,
+    lastName: lN,
+    email: eM,
+    password: pswd,
+  }
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -56,15 +67,16 @@ export default function CreateAccount() {
       setPasswordConfirmationNotValid(true);
       error=true; 
     } if (error) {
-      console.log("Account could not be created. Please follow th rules mentioned.");
+      console.log("Account could not be created. Please follow the rules mentioned.");
     } else {
-      userPost("users", {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-      });
-      setAccountCreated(true);
+      userPost("users", dataToPass).then((res)=> {
+        if (res.data.status === 200) {
+          localStorage.setItem("firstName",firstName);
+          localStorage.setItem("lastName",lastName);
+          setAccountCreated(true);
+        }
+      })
+      .catch((err)=>{alert(err)});
     }
   };
 

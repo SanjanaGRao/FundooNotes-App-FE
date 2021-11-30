@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, Fragment } from "react";
-import { Grid, Box, CardMedia } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import AddAlertOutlinedIcon from "@mui/icons-material/AddAlertOutlined";
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
@@ -79,13 +79,12 @@ export default function NotesFunctionIcons(props) {
   const openA = Boolean(anchorEl);
   const id = openA ? "simple-popover" : undefined;
 
-  const handleImage = (imagef,item) => {
-    console.log("Hi")
-    const formData = new FormData()
-    formData.append('title', props.item.title)
-    formData.append('content', props.item.content)
-    formData.append('color', props.item.color)
-    formData.append('profileImg', imagef)
+  const handleImage = (imagef) => {
+    const formData = new FormData();
+    formData.append('title', props.item.title);
+    formData.append('content', props.item.content);
+    formData.append('color', props.item.color);
+    formData.append('profileImg', imagef);
     updateNotes(formData, props.item._id).then((res) => {
         dispatch(updateOneNote(res))
     }).catch((err) => console.log(err.message));
@@ -177,7 +176,7 @@ export default function NotesFunctionIcons(props) {
         }}
         open={openSnackbar}
         autoHideDuration={5000}
-        message="Note moved to trash"
+        message="Note moved to Recycle Bin"
         onClose={handleToClose}
         action={<CloseIcon fontSize="small" onClick={handleToClose} />}
       />

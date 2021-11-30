@@ -21,12 +21,15 @@ import SplitscreenOutlinedIcon from "@mui/icons-material/SplitscreenOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import GridViewIcon from "@mui/icons-material/GridView";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setSearchedNotes, viewList } from "../reduxActions/actionsOnNotes";
 import { removeToken } from "../utils/userTokens";
+import { Divider } from "@material-ui/core";
+import AvatarReact from "react-avatar";
+import { fontSize } from "@mui/system";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -97,7 +100,12 @@ export default function Appbar({ handleDrawerOpen, title }) {
   const open = Boolean(anchorEl);
   const [signOut, setSignOut] = useState(false);
 
-  let emailAvatar = localStorage.getItem("emailAvatar");
+  const emailAvatar = localStorage.getItem("emailAvatar");
+  console.log(emailAvatar);
+  const firstName = localStorage.getItem("firstName");
+  console.log(firstName);
+  const lastName = localStorage.getItem("lastName");
+  console.log(lastName);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -128,12 +136,6 @@ export default function Appbar({ handleDrawerOpen, title }) {
   const refreshPage = () => {
     window.location.reload();
   };
-
-//   const logoutClick = (e) => {
-//     removeToken();
-//     setSignOut(true);
-// };
-
 
   return (
     <AppBar
@@ -203,17 +205,23 @@ export default function Appbar({ handleDrawerOpen, title }) {
             </Badge>
           </IconButton>
           <IconButton
+            sx={{
+              marginLeft: "25px",
+            }}
+          >
+            <Badge>
+              <AppsOutlinedIcon sx={{ color: "#5f6368" }} />
+            </Badge>
+          </IconButton>
+          <IconButton
             onClick={handleClick}
             size="large"
             edge="end"
             aria-label="account of current user"
             aria-haspopup="true"
             color="inherit"
-            sx={{
-              marginLeft: "25px",
-            }}
           >
-            <Avatar name={emailAvatar} size="32" round={true} />
+            <AvatarReact name={emailAvatar} size="40" round={true} />
             {/* <AccountCircle sx={{ fontSize: 40, color: "#5f6368" }} /> */}
           </IconButton>
           <Menu
@@ -248,8 +256,27 @@ export default function Appbar({ handleDrawerOpen, title }) {
               },
             }}
           >
-            <MenuItem onClick={()=>{removeToken();setSignOut(true)}}>
-              <ListItemIcon >
+            <MenuItem sx={{ paddingLeft: "16vh" }}>
+              <ListItemIcon>
+                <AvatarReact name={emailAvatar} size="40" round={true} />
+              </ListItemIcon>
+            </MenuItem>
+            <MenuItem style={{ fontSize: "2vh", textAlign: "center" }}>
+              <span>{emailAvatar}</span>
+            </MenuItem>
+            <MenuItem style={{ fontSize: "1.5vh", textAlign: "center" }}>
+              <span>
+                {firstName} {lastName}
+              </span>
+            </MenuItem>
+            <Divider />
+            <MenuItem
+              onClick={() => {
+                removeToken();
+                setSignOut(true);
+              }}
+            >
+              <ListItemIcon>
                 <Logout fontSize="small" />
               </ListItemIcon>
               Sign Out of my Account

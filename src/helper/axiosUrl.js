@@ -2,7 +2,7 @@ import axios from "axios";
 import { setToken } from "../utils/userTokens";
 
 const userConnect = (url, infos) => {
-  axios({
+  return axios({
     method: "post",
     url: url,
     data: infos,
@@ -11,12 +11,14 @@ const userConnect = (url, infos) => {
     },
   })
     .then(function (response) {
-      setToken(response.data.message.Token);
       console.log(response.data.message.Token);
       console.log(response.data);
+      setToken(response.data.message.Token);
+      return response;
     })
     .catch(function (error) {
       console.log(error);
+      throw new error;
     });
 };
 

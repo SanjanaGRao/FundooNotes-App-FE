@@ -138,6 +138,9 @@ const Notes = ({ value }) => {
               />
             </DialogContent>
             <DialogActions style={{ background: color }}>
+            {myNotes.map((item) => {
+               <NotesFunctionIcons item={item} /> 
+            })}
               <Button
                 variant="text"
                 id="submitButton"
@@ -151,6 +154,7 @@ const Notes = ({ value }) => {
             </DialogActions>
           </Dialog>
         </div>
+        
       </Box>
     // </div>
   ) : (
