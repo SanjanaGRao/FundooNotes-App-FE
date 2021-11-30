@@ -3,7 +3,8 @@
   direction: ltr;
   font-family: "Roboto", arial, sans-serif;
   font-size: 15px;
-  min-height: 11em;
+  width: 100%;
+  max-width: 645px;
   border: 1px solid transparent;
   box-sizing: border-box;
   overflow: hidden;
@@ -148,4 +149,8 @@ textarea.text-area {
   -webkit-box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
   border: solid transparent;
   border-width: 1px 1px 1px 6px;
+}
+
+.css-46bh2p-MuiCardContent-root {
+  padding: 14px;
 }

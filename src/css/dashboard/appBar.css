@@ -10,3 +10,12 @@
   background-color: #f1f3f4;
   border-color: #f1f3f4 ;
 }
+.name{
+  position: absolute;
+  left: 38%;
+}
+.emailID{
+  display: flex;
+  justify-content: center;
+  padding-left: 2.3em;
+}

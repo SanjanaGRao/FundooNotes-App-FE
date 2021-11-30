@@ -29,7 +29,6 @@ import { setSearchedNotes, viewList } from "../reduxActions/actionsOnNotes";
 import { removeToken } from "../utils/userTokens";
 import { Divider } from "@material-ui/core";
 import AvatarReact from "react-avatar";
-import { fontSize } from "@mui/system";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -222,7 +221,6 @@ export default function Appbar({ handleDrawerOpen, title }) {
             color="inherit"
           >
             <AvatarReact name={emailAvatar} size="40" round={true} />
-            {/* <AccountCircle sx={{ fontSize: 40, color: "#5f6368" }} /> */}
           </IconButton>
           <Menu
             anchorEl={anchorEl}
@@ -233,6 +231,7 @@ export default function Appbar({ handleDrawerOpen, title }) {
               elevation: 0,
               sx: {
                 overflow: "visible",
+                textAlign: "center",
                 filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
                 mt: 1.5,
                 "& .MuiAvatar-root": {
@@ -261,13 +260,17 @@ export default function Appbar({ handleDrawerOpen, title }) {
                 <AvatarReact name={emailAvatar} size="40" round={true} />
               </ListItemIcon>
             </MenuItem>
-            <MenuItem style={{ fontSize: "2vh", textAlign: "center" }}>
-              <span>{emailAvatar}</span>
+            <MenuItem style={{ fontSize: "2vh" }}>
+              <div className="emailID">
+                <span>{emailAvatar}</span>
+              </div>
             </MenuItem>
-            <MenuItem style={{ fontSize: "1.5vh", textAlign: "center" }}>
-              <span>
-                {firstName} {lastName}
-              </span>
+            <MenuItem style={{ fontSize: "1.75vh" }}>
+              <div className="name">
+                <span>
+                  {firstName} {lastName}
+                </span>
+              </div>
             </MenuItem>
             <Divider />
             <MenuItem

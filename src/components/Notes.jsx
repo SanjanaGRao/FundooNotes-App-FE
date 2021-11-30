@@ -9,6 +9,8 @@ import "../css/dashboard/addNotes.css";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import InputBase from "@mui/material/InputBase"
 import { updateNotes } from "../service/notesIntegration";
 import { useDispatch } from "react-redux";
 import { updateOneNote } from "../reduxActions/actionsOnNotes";
@@ -58,7 +60,7 @@ const Notes = ({ value }) => {
 
   return myNotes.length > 0 ? (
     // <div className="mainNew">
-      <Box sx={{ mx: "3px", transform: "scale(0.85)" }}>
+      <Box sx={{ mx: "4px", transform: "scale(0.85)", flexGrow: 1 }}>
         <Grid container spacing={3} justifyContent={viewList ? "center" : null}>
           {myNotes.map((item, singleNote) => {
             if (item.isTrash === false) {
@@ -73,7 +75,7 @@ const Notes = ({ value }) => {
                   <Card
                     variant="outlined"
                     justifyContent={viewList ? "center" : null}
-                    style={{ background: item.color }}
+                    style={{ background: item.color, borderRadius: "13px" }}
                     className="notesCard"
                     key={singleNote}
                     onMouseOver={() => {
@@ -107,34 +109,44 @@ const Notes = ({ value }) => {
                       {mouseHover[singleNote] ? (
                         <div className="noteIcons">
                           <div align="left">
-                            <NotesFunctionIcons item={item} />
+                            <NotesFunctionIcons item={item}/>
                           </div>
                         </div>
                       ) : null}
                     </CardContent>
                   </Card>
                 </Grid>
-              );
+                );
             }
           })}
         </Grid>
         <div>
           <Dialog fullWidth maxWidth="sm" open={open} onClose={handleClose}>
+            <DialogTitle style={{ background: color }}>
+          <InputBase
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            inputProps={{
+              style: {
+                minHeight: "36px",
+                width: "40vw",
+                fontWeight: "bold",
+                fontSize: "25px",
+              },
+            }}
+          />
+        </DialogTitle>
             <DialogContent style={{ background: color }}>
-              <input
-                className="title"
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                name="title"
-                placeholder="Title"
-              />
               <textarea
                 className="text-area"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 name="content"
                 placeholder="Take a note..."
+                inputProps={{
+                  style: { minHeight: "36px" }} }
               />
             </DialogContent>
             <DialogActions style={{ background: color }}>

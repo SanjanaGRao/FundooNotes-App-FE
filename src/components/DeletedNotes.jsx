@@ -1,4 +1,12 @@
-import { Grid, Card, Typography, Button, Box, IconButton, CardMedia } from "@mui/material";
+import {
+  Grid,
+  Card,
+  Typography,
+  Button,
+  Box,
+  IconButton,
+  CardMedia,
+} from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -95,7 +103,7 @@ export default function DeletedNotes() {
                 <Grid item xs={12} md={viewList ? 8 : 3} key={item._id}>
                   <Card
                     variant="outlined"
-                    style={{ background: item.color }}
+                    style={{ background: item.color, borderRadius: "12px" }}
                     justifyContent={viewList ? "center" : null}
                     className="notesCardDelete"
                     onMouseEnter={() => {
@@ -106,14 +114,14 @@ export default function DeletedNotes() {
                     }}
                   >
                     <CardContent>
-                    {item.profileImg !== undefined ? (
-                                        <CardMedia
-                                          component="img"
-                                          image={`http://localhost:4000/images/${item.profileImg}`}
-                                          alt="dish"
-                                          style={{ height: "150px" }}
-                                        />
-                                      ) : null}
+                      {item.profileImg !== undefined ? (
+                        <CardMedia
+                          component="img"
+                          image={`http://localhost:4000/images/${item.profileImg}`}
+                          alt="dish"
+                          style={{ height: "150px" }}
+                        />
+                      ) : null}
                       <Typography variant="h5">{item.title}</Typography>
                       <br />
                       <Typography sx={{ mb: 1.2 }} color="text.secondary">
@@ -173,7 +181,6 @@ export default function DeletedNotes() {
                   </Card>
                 </Grid>
               );
-
             }
           })}
         </Grid>

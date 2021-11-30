@@ -17,7 +17,6 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import { Link } from "react-router-dom";
 import userPost from "../service/usersApiIntegration";
-import { Redirect } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = React.useState("");
@@ -223,7 +222,7 @@ export default function Login() {
                     </div>
                   </div>
                 </div>
-                {success?<Redirect to="/dashboard"/>:null}
+                {success?(window.location="/dashboard"):null}
               </form>
             </div>
           </div>
