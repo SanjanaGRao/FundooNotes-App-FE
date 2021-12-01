@@ -222,7 +222,7 @@ export default function Login() {
                     </div>
                   </div>
                 </div>
-                {success?(window.location="/dashboard"):null}
+                {success? (window.location="/dashboard") : null}
               </form>
             </div>
           </div>

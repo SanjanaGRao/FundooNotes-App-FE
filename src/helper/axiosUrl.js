@@ -18,7 +18,7 @@ const userConnect = (url, infos) => {
     })
     .catch(function (error) {
       console.log(error);
-      throw new error;
+      throw new error ;
     });
 };
 

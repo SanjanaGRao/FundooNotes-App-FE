@@ -51,12 +51,12 @@ export default function Dashboard() {
         <Box sx={{ display: "flex"}}>
         <MiniDrawer open={open}  handleClick={handleClick} path={path} setPath={setPath}/>
         {(path==="trash") ? <DeletedNotes /> :
-        <div> 
+        <Box> 
          <AddNotes />
         <Box component="main" sx={{ flexGrow: 1}}>
           <Notes value={false}/>
         </Box>
-        </div>
+        </Box>
        }
        </Box>
       </Box>

@@ -46,6 +46,7 @@
   max-width: 645px;
   padding-left: 1.1em;
   padding-top: 0.5rem;
+  padding-right: 1.1em;
   background-color: #fff;
   border-radius: 5px;
   z-index: 10;
@@ -153,4 +154,11 @@ textarea.text-area {
 
 .css-46bh2p-MuiCardContent-root {
   padding: 14px;
+}
+.item-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }

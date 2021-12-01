@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { updateOneNote } from "../reduxActions/actionsOnNotes";
 import "../css/dashboard/addNotes.css";
 
-const Notes = ({ value }) => {
+const Notes = () => {
   const myNotes = useSelector((state) => state.allNotes.searchedNotes);
   const viewList = useSelector((state) => state.allNotes.viewList);
   const [mouseHover, setMouseHover] = React.useState(false);
@@ -59,8 +59,7 @@ const Notes = ({ value }) => {
   };
 
   return myNotes.length > 0 ? (
-    // <div className="mainNew">
-      <Box sx={{ mx: "4px", transform: "scale(0.85)", flexGrow: 1 }}>
+      <Box sx={{ mx: "5px", transform: "scale(0.85)", flexGrow: 1 }}>
         <Grid container spacing={3} justifyContent={viewList ? "center" : null}>
           {myNotes.map((item, singleNote) => {
             if (item.isTrash === false) {
@@ -102,7 +101,7 @@ const Notes = ({ value }) => {
                   ) : null}
                         <Typography variant="h5">{item.title}</Typography>
                         <br />
-                        <Typography sx={{ mb: 1.2 }} color="text.secondary">
+                        <Typography className="item-content" sx={{ mb: 1.2 }} color="text.secondary">
                           {item.content}
                         </Typography>
                       </div>
@@ -112,7 +111,7 @@ const Notes = ({ value }) => {
                             <NotesFunctionIcons item={item}/>
                           </div>
                         </div>
-                      ) : null}
+                      ) :<div style={{ height: "40px" }}></div>}
                     </CardContent>
                   </Card>
                 </Grid>
@@ -168,9 +167,8 @@ const Notes = ({ value }) => {
         </div>
         
       </Box>
-    // </div>
   ) : (
-    <span>No matching results.</span>
+    null
   );
 };
 
