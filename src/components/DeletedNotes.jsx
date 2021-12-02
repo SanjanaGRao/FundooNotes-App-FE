@@ -6,6 +6,10 @@ import {
   Box,
   IconButton,
   CardMedia,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
 } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import React from "react";
@@ -17,7 +21,7 @@ import { useDispatch } from "react-redux";
 import { updateOneNote, deleteOneNote } from "../reduxActions/actionsOnNotes";
 import { deleteNotes, updateNotes } from "../service/notesIntegration";
 import "../css/dashboard/deleteNotes.css";
-import CloseIcon from "@material-ui/icons/Close";
+//import CloseIcon from "@material-ui/icons/Close";
 
 export default function DeletedNotes() {
   const dispatch = useDispatch();
@@ -25,6 +29,15 @@ export default function DeletedNotes() {
   const [hover, setHover] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   const [itemRemoved, setItemRemoved] = React.useState("");
+  const [dialougOpen, setDialougOpen] = React.useState(false);
+
+  const handleDilougOpen = (item) => {
+    setDialougOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setDialougOpen(false);
+  };
 
   const handleRestore = (item) => {
     const data = {
@@ -39,7 +52,7 @@ export default function DeletedNotes() {
       })
       .catch((err) => console.log(err.message));
   };
-  const handleDelete = (item) => {
+  const handleDelete = (item) => { 
     deleteNotes(item._id)
       .then((res) => {
         setOpen(true);
@@ -118,13 +131,12 @@ export default function DeletedNotes() {
                         <CardMedia
                           component="img"
                           image={`http://localhost:4000/images/${item.profileImg}`}
-                          alt="dish"
-                          style={{ height: "150px" }}
+                          alt="image"
                         />
                       ) : null}
                       <Typography variant="h5">{item.title}</Typography>
                       <br />
-                      <Typography sx={{ mb: 1.2 }} color="text.secondary">
+                      <Typography className="item-content" sx={{ mb: 1.2 }} color="text.secondary">
                         {item.content}
                       </Typography>
                       <div align="left">
@@ -148,7 +160,7 @@ export default function DeletedNotes() {
                             >
                               <RestoreFromTrashOutlinedIcon fontSize="large" />
                             </IconButton>
-                            <Snackbar
+                            {/* <Snackbar
                               anchorOrigin={{
                                 horizontal: "right",
                                 vertical: "bottom",
@@ -173,9 +185,9 @@ export default function DeletedNotes() {
                                   />
                                 </div>
                               }
-                            />
+                            /> */}
                           </div>
-                        ) : null}
+                        ) : <div style={{ height: "40px" }}></div>}
                       </div>
                     </CardContent>
                   </Card>
@@ -185,6 +197,28 @@ export default function DeletedNotes() {
           })}
         </Grid>
       </Box>
+      <Dialog open={dialougOpen} onClose={handleDialogClose}>
+        <DialogContent>
+          <DialogContentText style={{ width: "32vw" }}>
+            Do you want to Delete the note forever?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleDialogClose}
+            style={{ color: "black", textTransform: "none" }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleDelete}
+            autoFocus
+            style={{ textTransform: "none" }}
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Snackbar
         anchorOrigin={{
           horizontal: "right",

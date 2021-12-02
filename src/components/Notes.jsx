@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { Grid, Typography, Button, CardMedia } from "@mui/material";
+import { Grid, Typography, Button, CardMedia, InputBase } from "@mui/material";
 import { useSelector } from "react-redux";
 import NotesFunctionIcons from "../components/NotesFunctionIcons";
 import "../css/dashboard/addNotes.css";
@@ -10,7 +10,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import InputBase from "@mui/material/InputBase"
 import { updateNotes } from "../service/notesIntegration";
 import { useDispatch } from "react-redux";
 import { updateOneNote } from "../reduxActions/actionsOnNotes";
@@ -74,7 +73,7 @@ const Notes = () => {
                   <Card
                     variant="outlined"
                     justifyContent={viewList ? "center" : null}
-                    style={{ background: item.color, borderRadius: "13px" }}
+                    style={{ background: item.color, borderRadius: "9px" }}
                     className="notesCard"
                     key={singleNote}
                     onMouseOver={() => {
@@ -138,8 +137,11 @@ const Notes = () => {
           />
         </DialogTitle>
             <DialogContent style={{ background: color }}>
-              <textarea
+              <InputBase
                 className="text-area"
+                type="text"
+                fullWidth
+                multiline={true}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 name="content"

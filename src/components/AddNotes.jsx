@@ -9,6 +9,7 @@ import ColorPalette from "./ColorPalette";
 import Popover from "@mui/material/Popover";
 import Brightness1Icon from "@mui/icons-material/Brightness1";
 import ImageIcon from '@mui/icons-material/Image';
+import { InputBase } from "@material-ui/core";
 
 export default function AddNotes() {
   const [titleFieldVisible, setTitleFieldVisible] = useState(false);
@@ -92,8 +93,11 @@ export default function AddNotes() {
             />
           )}
 
-          <textarea
+          <InputBase
             className="text-area"
+            fullWidth
+            type="text"
+            multiline={true}
             value={content}
             onChange={(event) => setContent(event.target.value)}
             onFocus={showTitleField}
