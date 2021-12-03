@@ -82,13 +82,12 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function MiniDrawer(props) {
-  const [open, setOpen] = useState(false);
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const handleDrawerOpenSideBar = () => {
+    props.setOpen(true);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleDrawerCloseSideBar = () => {
+    props.setOpen(false);
   };
 
   const menuItems = [
@@ -133,9 +132,10 @@ export default function MiniDrawer(props) {
     <Box sx={{ display: "flex" }}>
       <Drawer
         variant="permanent"
-        open={open}
-        onMouseOver={handleDrawerOpen}
-        onMouseLeave={handleDrawerClose}
+        open={props.open}
+        onClick={props.handleDrawerOpen}
+        onMouseOver={handleDrawerOpenSideBar}
+        onMouseLeave={handleDrawerCloseSideBar}
       >
         <DrawerHeader />
         <List>

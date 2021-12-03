@@ -150,7 +150,7 @@ export default function Appbar({ handleDrawerOpen, title }) {
           aria-label="open drawer"
           edge="start"
           color="inherit"
-          onClick={handleDrawerOpen}
+          onClick={(e) => { console.log("Hi"); handleDrawerOpen();}}
           sx={{
             marginRight: "15px",
           }}
