@@ -3,6 +3,8 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Grid, Typography, Button, CardMedia, InputBase } from "@mui/material";
+import Snackbar from "@material-ui/core/Snackbar";
+import CloseIcon from "@material-ui/icons/Close";
 import { useSelector } from "react-redux";
 import NotesFunctionIcons from "../components/NotesFunctionIcons";
 import "../css/dashboard/addNotes.css";
@@ -25,14 +27,38 @@ const Notes = () => {
   const [noteId, setNoteId] = React.useState("");
   const dispatch = useDispatch();
   const [color, setColor] = React.useState("White");
-  const [image,setImage]=React.useState("");
+  const [image, setImage] = React.useState("");
+  const [snackbar, setSnackbar] = React.useState(false);
+  const [undoItem, setUndoItem] = React.useState({});
 
   const data = {
     title: title,
     content: content,
     isTrash: false,
     color: color,
-    profileImg:image,
+    profileImg: image,
+  };
+  const handleSnackBar = (item) => {
+    setUndoItem(item);
+    setSnackbar(true);
+  };
+
+  const handleToClose = (event, reason) => {
+    if ("clickaway" === reason) return;
+    setSnackbar(false);
+  };
+
+  const undoRestore = () => {
+    const dataRestore = {
+      ...undoItem,
+      isTrash: false,
+    };
+    updateNotes(dataRestore, undoItem._id)
+      .then((res) => {
+        dispatch(updateOneNote(res));
+        handleToClose();
+      })
+      .catch((err) => console.log(err.message));
   };
 
   const handleClickOpen = (item) => {
@@ -58,120 +84,148 @@ const Notes = () => {
   };
 
   return myNotes.length > 0 ? (
-      <Box sx={{ mx: "5px", transform: "scale(0.85)", flexGrow: 1 }}>
-        <Grid container spacing={3} justifyContent={viewList ? "center" : null}>
-          {myNotes.map((item, singleNote) => {
-            if (item.isTrash === false) {
-              return (
-                <Grid
-                  position="relative"
-                  item
-                  xs={12}
-                  md={viewList ? 8 : 3}
-                  key={item._id}
-                >
-                  <Card
-                    variant="outlined"
-                    justifyContent={viewList ? "center" : null}
-                    style={{ background: item.color, borderRadius: "9px" }}
-                    className="notesCard"
-                    key={singleNote}
-                    onMouseOver={() => {
-                      setMouseHover({ [singleNote]: true });
-                    }}
-                    onMouseLeave={() => {
-                      setMouseHover({ [singleNote]: false });
-                    }}
-                  >
-                   
-                    <CardContent>
-                      <div
-                        onClick={() => {
-                          handleClickOpen(item);
-                        }}
-                      >
-                         {(item.profileImg !== undefined ) ? (
-                    <CardMedia
-                      component="img"
-                      image={`http://localhost:4000/images/${item.profileImg}`}
-                      alt="dish"style={{  maxwidth: 238,
-                        maxHeight: 238, paddingBottom: 15 }}
-                    />
-                  ) : null}
-                        <Typography variant="h5">{item.title}</Typography>
-                        <br />
-                        <Typography className="item-content" sx={{ mb: 1.2 }} color="text.secondary">
-                          {item.content}
-                        </Typography>
-                      </div>
-                      {mouseHover[singleNote] ? (
-                        <div className="noteIcons">
-                          <div align="left">
-                            <NotesFunctionIcons item={item}/>
-                          </div>
-                        </div>
-                      ) :<div style={{ height: "40px" }}></div>}
-                    </CardContent>
-                  </Card>
-                </Grid>
-                );
-            }
-          })}
-        </Grid>
-        <div>
-          <Dialog fullWidth maxWidth="sm" open={open} onClose={handleClose}>
-            <DialogTitle style={{ background: color }}>
-          <InputBase
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            inputProps={{
-              style: {
-                minHeight: "36px",
-                width: "40vw",
-                fontWeight: "bold",
-                fontSize: "25px",
-              },
-            }}
-          />
-        </DialogTitle>
-            <DialogContent style={{ background: color }}>
-              <InputBase
-                className="text-area"
-                type="text"
-                fullWidth
-                multiline={true}
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                name="content"
-                placeholder="Take a note..."
-                inputProps={{
-                  style: { minHeight: "36px" }} }
-              />
-            </DialogContent>
-            <DialogActions style={{ background: color }}>
-            {myNotes.map((item) => {
-               <NotesFunctionIcons item={item} /> 
-            })}
-              <Button
-                variant="text"
-                id="submitButton"
-                type="submit"
-                onClick={handleUpdate}
-                style={{ textTransform: "none" }}
-                color="inherit"
+    <Box sx={{ mx: "5px", transform: "scale(0.85)", flexGrow: 1 }}>
+      <Grid container spacing={3} justifyContent={viewList ? "center" : null}>
+        {myNotes.map((item, singleNote) => {
+          if (item.isTrash === false) {
+            return (
+              <Grid
+                position="relative"
+                item
+                xs={12}
+                md={viewList ? 8 : 3}
+                key={item._id}
               >
-                <b> Submit </b>
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </div>
-        
-      </Box>
-  ) : (
-    null
-  );
+                <Card
+                  variant="outlined"
+                  justifyContent={viewList ? "center" : null}
+                  style={{ background: item.color, borderRadius: "9px" }}
+                  className="notesCard"
+                  key={singleNote}
+                  onMouseOver={() => {
+                    setMouseHover({ [singleNote]: true });
+                  }}
+                  onMouseLeave={() => {
+                    setMouseHover({ [singleNote]: false });
+                  }}
+                >
+                  <CardContent>
+                    <div
+                      onClick={() => {
+                        handleClickOpen(item);
+                      }}
+                    >
+                      {item.profileImg !== undefined ? (
+                        <CardMedia
+                          component="img"
+                          image={`http://localhost:4000/images/${item.profileImg}`}
+                          alt="dish"
+                          style={{
+                            maxwidth: 238,
+                            maxHeight: 238,
+                            paddingBottom: 15,
+                          }}
+                        />
+                      ) : null}
+                      <Typography variant="h5">{item.title}</Typography>
+                      <br />
+                      <Typography
+                        className="item-content"
+                        sx={{ mb: 1.2 }}
+                        color="text.secondary"
+                      >
+                        {item.content}
+                      </Typography>
+                    </div>
+                    {mouseHover[singleNote] ? (
+                      <div className="noteIcons">
+                        <div align="left">
+                          <NotesFunctionIcons
+                            item={item}
+                            handleSnackBar={handleSnackBar}
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div style={{ height: "40px" }}></div>
+                    )}
+                  </CardContent>
+                </Card>
+              </Grid>
+            );
+          }
+        })}
+      </Grid>
+      <div>
+        <Dialog fullWidth maxWidth="sm" open={open} onClose={handleClose}>
+          <DialogTitle style={{ background: color }}>
+            <InputBase
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              inputProps={{
+                style: {
+                  minHeight: "36px",
+                  width: "40vw",
+                  fontWeight: "bold",
+                  fontSize: "25px",
+                },
+              }}
+            />
+          </DialogTitle>
+          <DialogContent style={{ background: color }}>
+            <InputBase
+              className="text-area"
+              type="text"
+              fullWidth
+              multiline={true}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              name="content"
+              placeholder="Take a note..."
+              inputProps={{
+                style: { minHeight: "36px" },
+              }}
+            />
+          </DialogContent>
+          <DialogActions style={{ background: color }}>
+            {myNotes.map((item) => {
+              <NotesFunctionIcons item={item} />;
+            })}
+            <Button
+              variant="text"
+              id="submitButton"
+              type="submit"
+              onClick={handleUpdate}
+              style={{ textTransform: "none" }}
+              color="inherit"
+            >
+              <b> Submit </b>
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+      <Snackbar
+        anchorOrigin={{
+          horizontal: "right",
+          vertical: "bottom",
+        }}
+        open={snackbar}
+        autoHideDuration={5000}
+        message="Note moved to Recycle Bin"
+        onClose={handleToClose}
+        action={
+          <div>
+            <Button variant="text" onClick={undoRestore}>
+              UNDO
+            </Button>
+            <CloseIcon fontSize="small" onClick={handleToClose} />
+          </div>
+        }
+      />
+    </Box>
+  ) : null;
 };
 
 export default Notes;

@@ -24,7 +24,7 @@ export default function Login() {
   const [emailNotValid, setEmailNotValid] = React.useState(false);
   const [passwordNotValid, setPasswordNotValid] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
-  const [success,setSuccess] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
 
   let Em = email;
   let Pwd = password;
@@ -36,23 +36,30 @@ export default function Login() {
   const handleSubmit = (event) => {
     let error = false;
     event.preventDefault();
-    if (email === "") { setEmailNotValid(true); error=true; }
-    if (password === "") { setPasswordNotValid(true); error=true; }
-    if(error) {
+    if (email === "") {
+      setEmailNotValid(true);
+      error = true;
+    }
+    if (password === "") {
+      setPasswordNotValid(true);
+      error = true;
+    }
+    if (error) {
       console.log("Cannot Log In.");
       alert("Login Unsuccessful.");
+    } else {
+      console.log(datas);
+      userPost("users/login", datas)
+        .then((res) => {
+          if (res.data.status === 200) {
+            localStorage.setItem("emailAvatar", email);
+            setSuccess(true);
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
     }
-    else {
-      console.log(datas)
-      userPost("users/login", datas )
-      .then((res)=> {
-        if (res.data.status === 200) {
-          localStorage.setItem("emailAvatar",email);
-          setSuccess(true);
-        }
-      })
-      .catch((err)=>{alert(err)});
-    }   
   };
   const handleClickShowPasswords = () => {
     setShowPassword(!showPassword);
@@ -211,6 +218,7 @@ export default function Login() {
                       </div>
                       <div className="create">
                         <Button
+                          id="submit"
                           type="submit"
                           variant="contained"
                           color="primary"
@@ -222,7 +230,7 @@ export default function Login() {
                     </div>
                   </div>
                 </div>
-                {success? (window.location="/dashboard") : null}
+                {success ? (window.location = "/dashboard") : null}
               </form>
             </div>
           </div>

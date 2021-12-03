@@ -39,7 +39,7 @@ export default function CreateAccount() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     React.useState(false);
-  const [accountCreated,setAccountCreated] = React.useState(false);
+  const [accountCreated, setAccountCreated] = React.useState(false);
 
   let fN = firstName;
   let lN = lastName;
@@ -50,7 +50,7 @@ export default function CreateAccount() {
     lastName: lN,
     email: eM,
     password: pswd,
-  }
+  };
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -59,24 +59,42 @@ export default function CreateAccount() {
   const handleSubmit = (event) => {
     let error = false;
     event.preventDefault();
-    if (!nameValidation.test(firstName)) { setFirstNameNotValid(true); error=true; } 
-    if (!nameValidation.test(lastName)) { setLastNameNotValid(true); error=true; } 
-    if (!emailValidation.test(email)) { setEmailNotValid(true); error=true; } 
-    if (!passwordValidation.test(password)) { setPasswordNotValid(true); error=true; } 
+    if (!nameValidation.test(firstName)) {
+      setFirstNameNotValid(true);
+      error = true;
+    }
+    if (!nameValidation.test(lastName)) {
+      setLastNameNotValid(true);
+      error = true;
+    }
+    if (!emailValidation.test(email)) {
+      setEmailNotValid(true);
+      error = true;
+    }
+    if (!passwordValidation.test(password)) {
+      setPasswordNotValid(true);
+      error = true;
+    }
     if (password !== passwordConfirmation) {
       setPasswordConfirmationNotValid(true);
-      error=true; 
-    } if (error) {
-      console.log("Account could not be created. Please follow the rules mentioned.");
+      error = true;
+    }
+    if (error) {
+      console.log(
+        "Account could not be created. Please follow the rules mentioned."
+      );
     } else {
-      userPost("users", dataToPass).then((res)=> {
-        if (res.data.status === 200) {
-          localStorage.setItem("firstName",firstName);
-          localStorage.setItem("lastName",lastName);
-          setAccountCreated(true);
-        }
-      })
-      .catch((err)=>{alert(err)});
+      userPost("users", dataToPass)
+        .then((res) => {
+          if (res.data.status === 200) {
+            localStorage.setItem("firstName", firstName);
+            localStorage.setItem("lastName", lastName);
+            setAccountCreated(true);
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
     }
   };
 
@@ -348,7 +366,7 @@ export default function CreateAccount() {
                   />
                 </div>
               </div>
-              {accountCreated?<Redirect to="/login"/>:null}
+              {accountCreated ? <Redirect to="/login" /> : null}
             </form>
           </div>
         </div>

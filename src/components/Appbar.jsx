@@ -100,11 +100,8 @@ export default function Appbar({ handleDrawerOpen, title }) {
   const [signOut, setSignOut] = useState(false);
 
   const emailAvatar = localStorage.getItem("emailAvatar");
-  console.log(emailAvatar);
   const firstName = localStorage.getItem("firstName");
-  console.log(firstName);
   const lastName = localStorage.getItem("lastName");
-  console.log(lastName);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -150,7 +147,9 @@ export default function Appbar({ handleDrawerOpen, title }) {
           aria-label="open drawer"
           edge="start"
           color="inherit"
-          onClick={(e) => { console.log("Hi"); handleDrawerOpen();}}
+          onClick={(e) => {
+            handleDrawerOpen();
+          }}
           sx={{
             marginRight: "15px",
           }}

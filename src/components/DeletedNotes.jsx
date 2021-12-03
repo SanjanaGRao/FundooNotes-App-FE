@@ -28,7 +28,6 @@ export default function DeletedNotes() {
   const viewList = useSelector((state) => state.allNotes.viewList);
   const [hover, setHover] = React.useState([]);
   const [open, setOpen] = React.useState(false);
-  const [itemRemoved, setItemRemoved] = React.useState("");
   const [dialougOpen, setDialougOpen] = React.useState(false);
 
   const handleDilougOpen = (item) => {
@@ -52,7 +51,7 @@ export default function DeletedNotes() {
       })
       .catch((err) => console.log(err.message));
   };
-  const handleDelete = (item) => { 
+  const handleDelete = (item) => {
     deleteNotes(item._id)
       .then((res) => {
         setOpen(true);
@@ -61,21 +60,6 @@ export default function DeletedNotes() {
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const undoRestore = (itemRemoved) => {
-    const dataRestore = {
-      title: itemRemoved.title,
-      content: itemRemoved.content,
-      isTrash: true,
-      color: itemRemoved.color,
-    };
-    updateNotes(dataRestore, itemRemoved._id)
-      .then((res) => {
-        dispatch(updateOneNote(res));
-        setOpen(true);
-      })
-      .catch((err) => console.log(err.message));
   };
 
   const handleToClose = (event, reason) => {
@@ -136,7 +120,11 @@ export default function DeletedNotes() {
                       ) : null}
                       <Typography variant="h5">{item.title}</Typography>
                       <br />
-                      <Typography className="item-content" sx={{ mb: 1.2 }} color="text.secondary">
+                      <Typography
+                        className="item-content"
+                        sx={{ mb: 1.2 }}
+                        color="text.secondary"
+                      >
                         {item.content}
                       </Typography>
                       <div align="left">
@@ -160,34 +148,10 @@ export default function DeletedNotes() {
                             >
                               <RestoreFromTrashOutlinedIcon fontSize="large" />
                             </IconButton>
-                            {/* <Snackbar
-                              anchorOrigin={{
-                                horizontal: "right",
-                                vertical: "bottom",
-                              }}
-                              open={open}
-                              autoHideDuration={5000}
-                              message="Note restored"
-                              onClose={handleToClose}
-                              action={
-                                <div>
-                                  <Button
-                                    variant="text"
-                                    onClick={() => {
-                                      undoRestore(itemRemoved);
-                                    }}
-                                  >
-                                    UNDO
-                                  </Button>
-                                  <CloseIcon
-                                    fontSize="small"
-                                    onClick={handleToClose}
-                                  />
-                                </div>
-                              }
-                            /> */}
                           </div>
-                        ) : <div style={{ height: "40px" }}></div>}
+                        ) : (
+                          <div style={{ height: "40px" }}></div>
+                        )}
                       </div>
                     </CardContent>
                   </Card>

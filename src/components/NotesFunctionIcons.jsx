@@ -8,8 +8,7 @@ import ColorLensOutlinedIcon from "@mui/icons-material/ColorLensOutlined";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import Snackbar from "@material-ui/core/Snackbar";
-import CloseIcon from "@material-ui/icons/Close";
+
 import { useDispatch } from "react-redux";
 import Popover from "@mui/material/Popover";
 import Brightness1Icon from "@mui/icons-material/Brightness1";
@@ -18,26 +17,26 @@ import { updateOneNote } from "../reduxActions/actionsOnNotes";
 import ColorPalette from "./ColorPalette";
 
 export default function NotesFunctionIcons(props) {
-  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [color, setColor] = useState("White");
-  const [image,setImage]=React.useState("");
+  const [image, setImage] = useState("");
+  const [snackbar, setSnackbar] = useState(false);
 
   const dispatch = useDispatch();
 
-  const handleDelete = (item) => {
+  const handleDelete = () => {
     const dataDelete = {
       title: props.item.title,
       content: props.item.content,
       isTrash: true,
       color: props.item.color,
-      profileImg:props.item.image,
+      profileImg: props.item.image,
     };
     updateNotes(dataDelete, props.item._id)
       .then((res) => {
         dispatch(updateOneNote(res));
-        setOpenSnackbar(true);
+        props.handleSnackBar(props.item);
       })
       .catch((err) => console.log(err.message));
   };
@@ -52,7 +51,7 @@ export default function NotesFunctionIcons(props) {
       content: props.item.content,
       isTrash: false,
       color: colorNote,
-      profileImg:image,
+      profileImg: image,
     };
     console.log(dataNotes);
     console.log(props.item._id);
@@ -62,11 +61,6 @@ export default function NotesFunctionIcons(props) {
       })
       .catch((err) => console.log(err.message));
     handleClose();
-  };
-
-  const handleToClose = (event, reason) => {
-    if ("clickaway" === reason) return;
-    setOpenSnackbar(false);
   };
 
   const handleClick = (event) => {
@@ -81,14 +75,16 @@ export default function NotesFunctionIcons(props) {
 
   const handleImage = (imagef) => {
     const formData = new FormData();
-    formData.append('title', props.item.title);
-    formData.append('content', props.item.content);
-    formData.append('color', props.item.color);
-    formData.append('profileImg', imagef);
-    updateNotes(formData, props.item._id).then((res) => {
-        dispatch(updateOneNote(res))
-    }).catch((err) => console.log(err.message));
-}
+    formData.append("title", props.item.title);
+    formData.append("content", props.item.content);
+    formData.append("color", props.item.color);
+    formData.append("profileImg", imagef);
+    updateNotes(formData, props.item._id)
+      .then((res) => {
+        dispatch(updateOneNote(res));
+      })
+      .catch((err) => console.log(err.message));
+  };
 
   return (
     <Box>
@@ -117,7 +113,7 @@ export default function NotesFunctionIcons(props) {
             horizontal: "left",
           }}
         >
-          <Grid container >
+          <Grid container>
             {ColorPalette.map((colorItem, index) => {
               return (
                 <Grid
@@ -142,21 +138,27 @@ export default function NotesFunctionIcons(props) {
           </Grid>
         </Popover>
         <Fragment>
-        <input
-          accept="image/*"
-          type="file"
-          onChange={(e)=>{
-              console.log(image)
-            handleImage(e.target.files[0],props.item)}}
-          id="icon-button-file"
-          style={{ display: 'none', }}
-        />
-        <label htmlFor="icon-button-file">
-        <IconButton size="small" color="default" component="span" sx={{ padding: "8px" }} >
-          <InsertPhotoOutlinedIcon color="action" />
-        </IconButton>
-        </label>
-      </Fragment>
+          <input
+            accept="image/*"
+            type="file"
+            onChange={(e) => {
+              console.log(image);
+              handleImage(e.target.files[0], props.item);
+            }}
+            id="icon-button-file"
+            style={{ display: "none" }}
+          />
+          <label htmlFor="icon-button-file">
+            <IconButton
+              size="small"
+              color="default"
+              component="span"
+              sx={{ padding: "8px" }}
+            >
+              <InsertPhotoOutlinedIcon color="action" />
+            </IconButton>
+          </label>
+        </Fragment>
         <IconButton size="small" color="default" sx={{ padding: "8px" }}>
           <ArchiveOutlinedIcon />
         </IconButton>
@@ -167,19 +169,7 @@ export default function NotesFunctionIcons(props) {
           onClick={handleDelete}
         >
           <DeleteOutlinedIcon />
-          
         </IconButton>
-        <Snackbar
-        anchorOrigin={{
-          horizontal: "right",
-          vertical: "bottom",
-        }}
-        open={openSnackbar}
-        autoHideDuration={5000}
-        message="Note moved to Recycle Bin"
-        onClose={handleToClose}
-        action={<CloseIcon fontSize="small" onClick={handleToClose} />}
-      />
       </Grid>
     </Box>
   );
